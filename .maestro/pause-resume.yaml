@@ -1,0 +1,14 @@
+# 사전 조건: add-url.yaml 선행 실행 (testfile 항목 존재)
+# 실행: maestro test .maestro/pause-resume.yaml
+# 상세 화면 액션은 확인 Alert(시스템 다이얼로그)을 거치므로 각 액션 2회 탭 — 버튼 1회 + Alert 확인 1회
+appId: com.zzizily.ariadm
+---
+- launchApp
+- tapOn: '.*testfile.*'
+- tapOn: '.*일시정지.*'
+- tapOn: '.*일시정지.*'
+- extendedWaitUntil:
+    visible: '.*재개.*'
+    timeout: 10000
+- tapOn: '.*재개.*'
+- tapOn: '.*재개.*'

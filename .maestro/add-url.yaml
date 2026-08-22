@@ -1,0 +1,25 @@
+# 사전 조건: docker compose up -d --wait (aria2 + fileserver) + dev build 에뮬레이터 설치
+# 실행: maestro test .maestro/add-url.yaml
+appId: com.zzizily.ariadm
+env:
+  HOST: 10.0.2.2      # Android 에뮬레이터 → 호스트 루프백
+  SECRET: it-secret
+---
+- launchApp
+- tapOn: '.*설정.*'
+- tapOn: '.*프로필.*'
+- tapOn: '.*이름.*'
+- inputText: local
+- tapOn: '.*호스트.*'
+- inputText: ${HOST}
+- tapOn: '.*RPC secret.*'
+- inputText: ${SECRET}
+- tapOn: '.*연결 테스트.*'
+- tapOn: '.*저장.*'
+- tapOn: '.*추가.*'
+- tapOn: '.*URL 또는 magnet 링크.*'
+- inputText: http://fileserver/testfile.bin
+- tapOn: '.*추가.*'
+- extendedWaitUntil:
+    visible: '.*testfile.*'
+    timeout: 20000
