@@ -45,4 +45,8 @@ export const zh: Partial<Dict> = {
   settings_lang_auto: '自动 (跟随设备语言)',
   settings_profiles: '服务器配置',
   empty_no_profile: '请先在设置中添加服务器配置',
+  row_remaining: '剩余',
+  row_error: '错误 {code}: {msg}',
+  detail_title: '详情',
+  control_failed: '操作失败',
 };

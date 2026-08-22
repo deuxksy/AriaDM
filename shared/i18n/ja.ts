@@ -45,4 +45,8 @@ export const ja: Partial<Dict> = {
   settings_lang_auto: '自動 (端末の言語)',
   settings_profiles: 'サーバープロファイル',
   empty_no_profile: '先に設定でサーバープロファイルを追加してください',
+  row_remaining: '残り',
+  row_error: 'エラー {code}: {msg}',
+  detail_title: '詳細',
+  control_failed: '操作に失敗しました',
 };

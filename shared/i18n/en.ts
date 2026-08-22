@@ -43,6 +43,10 @@ export const en = {
   settings_lang_auto: 'Auto (device language)',
   settings_profiles: 'Server profiles',
   empty_no_profile: 'Add a server profile in Settings first',
+  row_remaining: 'remaining',
+  row_error: 'Error {code}: {msg}',
+  detail_title: 'Details',
+  control_failed: 'Control failed',
 } as const;
 
 export type DictKey = keyof typeof en;

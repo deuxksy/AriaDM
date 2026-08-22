@@ -46,4 +46,8 @@ export const ko: Partial<Dict> = {
   settings_lang_auto: '자동 (기기 언어)',
   settings_profiles: '서버 프로필',
   empty_no_profile: '설정에서 서버 프로필을 먼저 추가하세요',
+  row_remaining: '남음',
+  row_error: '오류 {code}: {msg}',
+  detail_title: '상세',
+  control_failed: '제어 실패',
 };
