@@ -151,9 +151,9 @@ graph TD
 
 ## 수익 모델 — IAP
 
-- v1: **전 기능 무료** 출시. RevenueCat scaffold만 내장 (entitlement `pro`)
+- v1: **전 기능 무료** 출시. IAP scaffold는 **entitlement 경계 인터페이스**(`isPro()` 등)만 포함 — `react-native-purchases` SDK 설치·RevenueCat 연동은 Pro 기능(relay push) 출시 시점에 추가 (유휴 의존성 방지)
 - 유료 전환 시점 = 클라우드 relay push 출시. Pro = relay push + 파일 브라우저(P2)
-- 결제: react-native-purchases (StoreKit 2 / Play Billing 래핑) — 자체 검증 서버 불필요
+- 결제(출시 시점): react-native-purchases (StoreKit 2 / Play Billing 래핑) — 자체 검증 서버 불필요
 
 ## 기술 스택
 
