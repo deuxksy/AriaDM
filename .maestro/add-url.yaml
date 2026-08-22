@@ -18,7 +18,8 @@ env:
 - tapOn: '.*저장.*'
 - tapOn: '.*추가.*'
 - tapOn: '.*URL 또는 magnet 링크.*'
-- inputText: http://fileserver/testfile.bin
+# /slow/ — 20KB/s 스로틀 경로. 1MB 빠른 경로는 즉시 완료되어 active 노출·일시정지와 경합함
+- inputText: http://fileserver/slow/testfile.bin
 - tapOn: '.*추가.*'
 - extendedWaitUntil:
     visible: '.*testfile.*'

@@ -44,7 +44,9 @@ export function DownloadList() {
       <FlatList
         data={items}
         keyExtractor={(d) => d.gid}
-        onEndReached={() => { if (kind !== 'active' && items.length >= limit) setLimit((l) => l + 100); }}
+        // 확장 판단은 세그먼트 필터 전 원본 페이지 기준 — complete/failed는 status로 걸러져
+        // items 길이가 실제보다 작아 필터 후 길이로 판단하면 확장이 조기 차단된다 (T8 가드)
+        onEndReached={() => { if (kind !== 'active' && (src?.length ?? 0) >= limit) setLimit((l) => l + 100); }}
         onEndReachedThreshold={0.5}
         renderItem={({ item }) => (
           <DownloadRow

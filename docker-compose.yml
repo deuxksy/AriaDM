@@ -20,6 +20,8 @@ services:
     image: nginx:alpine
     ports:
       - "8088:80"
-    command: sh -c "head -c 1048576 /dev/urandom > /usr/share/nginx/html/testfile.bin && nginx -g 'daemon off;'"
+    volumes:
+      - ./docker/fileserver.conf:/etc/nginx/conf.d/default.conf:ro
+    command: sh -c "head -c 1048576 /dev/urandom > /usr/share/nginx/html/testfile.bin && mkdir -p /usr/share/nginx/html/slow && cp /usr/share/nginx/html/testfile.bin /usr/share/nginx/html/slow/testfile.bin && nginx -g 'daemon off;'"
 volumes:
   aria2-downloads:

@@ -69,7 +69,7 @@ SECRET=$(ssh heritage "docker exec aria2 sh -c 'grep ^rpc-secret= /config/aria2.
 
 ## E2E (Maestro)
 
-사전 조건: docker aria2 기동 + 에뮬레이터/실기기에 dev build 설치.
+사전 조건: docker aria2 기동 + 에뮬레이터/실기기에 dev build 설치 + **에뮬레이터 로케일 ko 설정** (플로우 셀렉터가 ko 사전값 — '.*설정.*', '.*일시정지.*' 등 — 전제).
 
 ```bash
 docker compose up -d --wait
@@ -81,6 +81,7 @@ maestro test .maestro/pause-resume.yaml   # 상세 모달 일시정지/재개
 주의:
 
 - `add-url.yaml`은 `HOST=10.0.2.2`(에뮬레이터 → 호스트 루프백) 기준. 실기기에서는 호스트 LAN/Tailscale IP로 재정의
+- URL은 `http://fileserver/slow/testfile.bin`(20KB/s 스로틀) — 빠른 경로는 1MB가 즉시 완료되어 active 노출·일시정지 탭과 경합함
 - 상세 화면 액션은 확인 Alert를 거치므로 각 액션을 2회 탭한다 (버튼 + Alert 확인)
 - 폼 입력 탭은 라벨 텍스트 매칭 기반이라 기기·언어에 따라 보정 필요 — 첫 실기 실행 시 캘리브레이션 전제
 
@@ -89,7 +90,7 @@ maestro test .maestro/pause-resume.yaml   # 상세 모달 일시정지/재개
 ```
 app/        — expo-router 라우팅 (tabs: 목록·추가·설정 / modal: 상세·프로필)
 core/       — rpc(aria2 JSON-RPC, WS+HTTP fallback)·notifications·iap
-features/   — 기능별 로직 (profiles, downloads, new-download, settings)
+features/   — 기능별 로직 (profiles, downloads, new-download, stats, settings)
 shared/     — format·base64·i18n(ko/en/zh/ja)·theme
 ```
 
