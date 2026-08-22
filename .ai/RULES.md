@@ -10,7 +10,7 @@
 - `pnpm start` / `pnpm android` / `pnpm ios` — Metro 및 앱 실행
 - `pnpm typecheck` — tsc --noEmit
 - `pnpm test` — 단위 테스트 (jest-expo, jest 29 고정 — jest-expo 57 호환)
-- `pnpm it` — docker aria2 통합 테스트 (자동 기동/정리)
+- `pnpm it:docker` — docker aria2 통합 테스트 (자동 기동/정리)
 
 ## 구조
 

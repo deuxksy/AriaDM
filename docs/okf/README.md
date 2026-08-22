@@ -16,6 +16,7 @@
 실무 목표 해결 절차.
 
 - [홈택스 인터넷 개인사업자 등록 가이드](how-to/2026-08-22-hometax-sole-proprietor-registration.md) — 온라인 사업자등록 신청 절차부터 스토어 조직 계정 전환(D-U-N-S)까지
+- [AriaDM 개발 가이드](how-to/dev-guide.md) — 개발 환경 구성, 단위·통합 테스트, 실기기 배포, Maestro E2E
 
 ## Reference
 
