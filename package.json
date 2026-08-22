@@ -35,8 +35,8 @@
   },
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "it:docker": "docker compose up -d --wait && ARIA2_IT_URL=http://localhost:6800 ARIA2_IT_SECRET=it-secret jest -c jest.config.integration.js --runInBand; rc=$?; docker compose down -v; exit $rc",
