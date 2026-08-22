@@ -1,10 +1,18 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import NetInfo from '@react-native-community/netinfo';
+import { router, type Href } from 'expo-router';
+import * as Notifications from 'expo-notifications';
 import { Aria2Connection } from './connection';
+import { Aria2 } from './methods';
 import type { ConnState } from './types';
 import { useProfiles, getActiveProfile } from '../../features/profiles/store';
 import { createProfileStorage } from '../../features/profiles/storage';
+import { useSettings } from '../../features/settings/store';
+import { ensurePermission, notifyComplete } from '../notifications/notifications';
+// import만으로 background.ts의 TaskManager.defineTask가 등록됨
+import { mmkvSeen, registerBackgroundTask } from '../notifications/background';
+import { downloadName } from '../../shared/format';
 
 interface Ctx {
   conn: Aria2Connection | null;
@@ -49,10 +57,20 @@ export function ConnectionProvider({ children }: { children: React.ReactNode }) 
     connRef.current = c;
     setConn(c);
     const offState = c.onStateChange(setState);
-    // aria2 이벤트 → 캐시 무효화로 실시간 갱신
-    const offNotif = c.onNotification(() => {
+    // aria2 이벤트 → 캐시 무효화 + foreground 완료 즉시 알림
+    const offNotif = c.onNotification(async (e) => {
       qc.invalidateQueries({ queryKey: ['downloads'] });
       qc.invalidateQueries({ queryKey: ['globalStat'] });
+      if ((e.name === 'onDownloadComplete' || e.name === 'onBtDownloadComplete')
+          && useSettings.getState().notifyOnComplete) {
+        const info = await Aria2.tellStatus(c, e.gid).catch(() => null);
+        const seen = new Set(mmkvSeen.load());
+        if (!seen.has(e.gid)) {
+          await notifyComplete(info ? downloadName(info) : e.gid, e.gid);
+          seen.add(e.gid);
+          mmkvSeen.save([...seen].slice(-300));
+        }
+      }
     });
     c.start();
     // NetInfo: 네트워크 복구 시 백오프 무시 즉시 재연결
@@ -61,6 +79,22 @@ export function ConnectionProvider({ children }: { children: React.ReactNode }) 
     });
     return () => { offState(); offNotif(); netSub(); c.stop(); };
   }, [connKey, qc]);
+
+  // 앱 시작 1회 — 설정 hydrate, 알림 권한, background task 등록, 알림 탭 라우팅
+  useEffect(() => {
+    useSettings.getState().hydrate();
+    // 기본값 true지만 권한이 없으면 알림 불가 — 시작 시 1회 요청하고 거부 시 기능 off
+    ensurePermission().then((granted) => {
+      if (!granted && useSettings.getState().notifyOnComplete) useSettings.getState().setNotify(false);
+    });
+    registerBackgroundTask().catch(() => undefined);
+    const sub = Notifications.addNotificationResponseReceivedListener((resp) => {
+      const gid = (resp.notification.request.content.data as { gid?: string } | undefined)?.gid;
+      // /modal/[gid] route 파일은 상세 화면 task가 생성 — router.d.ts 재생성 전까지 캐스트
+      if (typeof gid === 'string') router.push(`/modal/${gid}` as Href);
+    });
+    return () => sub.remove();
+  }, []);
 
   return <ConnectionCtx.Provider value={{ conn, state, profile }}>{children}</ConnectionCtx.Provider>;
 }
