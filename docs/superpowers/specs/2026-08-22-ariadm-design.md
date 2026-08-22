@@ -59,14 +59,7 @@ aria2 daemon을 JSON-RPC/WebSocket으로 원격 제어하는 크로스플랫폼 
 
 ## 기능 Roadmap
 
-| 단계 | 기능 | 내용 |
-| :--- | :--- | :--- |
-| P0 | 핵심 제어 | 프로필 CRUD·연결 테스트, 다운로드 목록(진행/대기/완료/중지), URL/magnet/torrent 추가, 일시정지·재개·삭제, 전역 속도 표시 |
-| P0 | 완료 알림 | Foreground WS 이벤트 즉시 알림 + Background 폴링 로컬 알림 |
-| P1 | 그래프·상세 | 실시간 업/다운 속도 그래프, 다운로드별 상세(peer, piece, 서버 응답) |
-| P1 | 다국어 확장 | es·ru·de·fr·it·pl·cz 및 zh-Hant 사전 추가 + 커뮤니티 번역 PR 접수. **AriaNg(MIT) 사전의 aria2 도메인 용어를 재사용**해 용어 일관성 확보 (attribution 명시). 아키텍처는 v1부터 N개 언어 지원(사전 per-언어 파일, en 기준 fallback), 기기 언어 자동 감지. 스토어 listing도 주요 언어 현지화 |
-| P2 | 파일 브라우저 | 완료 파일 탐색 (WebDAV/SFTP 연동) — Pro 후보 |
-| Pro | 클라우드 relay push | 운영 relay가 APNs/FCM 중계 — 유료 |
+로드맵의 Single Source of Truth는 [ROADMAP.md](../../ROADMAP.md) — 무료(=Aria2-Explorer/AriaNg 수준)와 Pro(그 이상) 경계로 재구성됨 (2026-08-22).
 
 ## 아키텍처
 
@@ -230,3 +223,5 @@ SSH 접근: `ssh heritage` (Tailscale). CI에서는 docker-compose 기동한 격
 | 이름 | AriaDM | AriaNG 컨벤션 계승, DM=Download Manager 자명, 충돌 없음 | 2026-08-22 |
 | 테스트 대상 | homelab heritage aria2 (운영 인스턴스) | 실데이터 검증, WS 동작 확인 | 2026-08-22 |
 | 스토어 계정 | dev@zzizily.com 전용 + Personal 등록 | 운영 분리·보안, 이후 조직 이전 가능 | 2026-08-22 |
+| Freemium 경계 | 무료 = Aria2-Explorer(AriaNg 내장) 수준, Pro = 그 이상의 모바일 고유 가치(그래프·relay·파일 브라우저·통계·동기화·위젯·자동화) | 채택 확보 후 수익 — ROADMAP.md가 SSOT | 2026-08-22 |
+| 공개 전환 | v0.1.0 달성으로 MIT 라이선스와 함께 public 전환 | 사전 합의 조건 달성, 커뮤니티 번역 길 확보 | 2026-08-22 |
