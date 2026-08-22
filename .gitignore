@@ -1,47 +1,70 @@
-# macOS
+# --- macOS ---
 .DS_Store
-*.pem
+.Spotlight-V100
+.Trashes
+*.dSYM
 
-# Node
+# --- Linux ---
+*~
+.directory
+
+# --- Node ---
 node_modules/
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+.pnpm-store/
 
-# Expo
+# --- Expo ---
 .expo/
 dist/
 web-build/
 expo-env.d.ts
 
-# Native (scaffold 템플릿 항목)
+# --- Native (CNG: prebuild 재생성 대상 — 커밋 금지, plugins/가 SSOT) ---
 .kotlin/
-*.orig.*
+/ios
+/android
+
+# --- Xcode/iOS 빌드 산출물 (/ios 외부 유출 대비) ---
+xcuserdata/
+*.xcuserstate
+*.xcarchive
+*.ipa
+DerivedData/
+
+# --- Android 빌드 산출물 (/android 외부 유출 대비) ---
+.gradle/
+local.properties
+*.keystore
 *.jks
+*.aab
+
+# --- 서명 자격 (실수 커밋 방지) ---
+*.pem
 *.p8
 *.p12
 *.key
 *.mobileprovision
-/ios
-/android
+*.orig.*
 
-# Metro
+# --- Metro ---
 .metro-health-check*
 
-# OMC operational artifacts
+# --- OMC operational artifacts ---
 .omc/
+.claude/
 
-# Environment
+# --- Environment ---
 .env
 .env.*
 !.env.example
 
-# TypeScript
+# --- TypeScript ---
 *.tsbuildinfo
 
-# Test coverage
+# --- Test coverage ---
 coverage/
-.claude/
 
-# Release build 산출물 (xcarchive·ipa)
+# --- Release 빌드 산출물 (xcarchive·ipa·payload) ---
 build/
