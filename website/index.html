@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AriaDM — aria2 다운로드 원격 제어</title>
+  <meta name="description" content="NAS·서버의 aria2를 iOS·Android에서 원격 제어하는 MIT 오픈소스 앱. 다운로드 관리, 실시간 속도, 완료 알림.">
+  <link rel="canonical" href="https://ariadm.zzizily.com/">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ariadm.zzizily.com/">
+  <meta property="og:title" content="AriaDM — aria2 downloads in your pocket">
+  <meta property="og:description" content="Open-source aria2 remote control for iOS and Android.">
+  <meta property="og:image" content="https://ariadm.zzizily.com/assets/shot-downloads.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="/">
+    <img src="assets/favicon.png" alt="AriaDM" width="24" height="24">
+    <span>AriaDM</span>
+  </a>
+  <div class="nav-right">
+    <button id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+    <a class="github" href="https://github.com/deuxksy/AriaDM" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1 data-en="aria2 downloads, in your pocket">aria2 다운로드 관리, 주머니에서</h1>
+  <p class="sub" data-en="Control the aria2 on your NAS or server from iOS and Android. Add, pause and resume downloads, watch live speeds, get finish notifications — open source, MIT.">NAS나 서버의 aria2를 iOS·Android 앱으로 원격 제어하세요. 다운로드 추가·일시정지·재개, 실시간 속도 확인, 완료 알림까지 — 오픈소스 MIT.</p>
+  <div class="cta">
+    <a class="btn primary" href="#download" data-en="Download">다운로드</a>
+    <a class="btn" href="https://github.com/deuxksy/AriaDM" target="_blank" rel="noopener" data-en="View on GitHub">GitHub에서 보기</a>
+  </div>
+  <div class="badges">
+    <img src="https://img.shields.io/badge/license-MIT-4C9EFF?style=flat-square&labelColor=151A23" alt="MIT License" width="84" height="20" loading="lazy">
+    <img src="https://img.shields.io/github/stars/deuxksy/AriaDM?style=flat-square&labelColor=151A23&color=4C9EFF" alt="GitHub stars" width="70" height="20" loading="lazy">
+  </div>
+  <div class="shots">
+    <div class="phone"><img src="assets/shot-downloads.webp" alt="Downloads screen" width="750" height="1624" fetchpriority="high"></div>
+    <div class="phone"><img src="assets/shot-settings.webp" alt="Settings screen" width="750" height="1624" loading="lazy"></div>
+    <div class="phone"><img src="assets/shot-add.webp" alt="Add download screen" width="750" height="1624" loading="lazy"></div>
+  </div>
+</header>
+
+<section id="features">
+  <h2 data-en="Features">기능</h2>
+  <div class="cards">
+    <article class="card">
+      <h3 data-en="Free">무료</h3>
+      <p class="price" data-en="Open source · forever">오픈소스 · 영원히</p>
+      <p data-en="The open-source baseline — everything competitor apps offer, free.">오픈소스 기준선 — 경쟁 앱 수준의 기능을 모두 무료로.</p>
+      <ul>
+        <li data-en="Download list &amp; control (add, pause, resume, remove)">다운로드 목록·제어 (추가·일시정지·재개·삭제)</li>
+        <li data-en="Local finish notifications">완료 로컬 알림</li>
+        <li data-en="Multiple server profiles">다중 프로필 서버 관리</li>
+        <li data-en="Korean · English · 中文 · 日本語">한국어 · English · 中文 · 日本語</li>
+      </ul>
+      <p class="status" data-en="Shipped in v0.1.0">v0.1.0 출시</p>
+    </article>
+    <article class="card pro">
+      <h3>Pro</h3>
+      <p class="price" data-en="$9.99 · lifetime">$9.99 · 평생</p>
+      <p data-en="Mobile-native value beyond the baseline.">기준선을 넘어서는 모바일 고유 가치.</p>
+      <ul>
+        <li data-en="Live speed graph">실시간 속도 그래프</li>
+        <li data-en="File browser (WebDAV/SFTP)">파일 브라우저 (WebDAV/SFTP)</li>
+        <li data-en="Stats dashboard">통계 대시보드</li>
+        <li data-en="Widgets &amp; multi-server monitoring">위젯·멀티 서버 모니터링</li>
+      </ul>
+      <p class="status" data-en="Coming soon (roadmap P1–P2)">준비중 (로드맵 P1–P2)</p>
+    </article>
+    <article class="card">
+      <h3>Cloud</h3>
+      <p class="price" data-en="$0.99/mo · $9.99/yr">$0.99/월 · $9.99/년</p>
+      <p data-en="Server-backed features that fund real infrastructure.">실제 인프라가 따르는 서버 기반 기능.</p>
+      <ul>
+        <li data-en="Cloud relay push notifications">클라우드 relay push 알림</li>
+        <li data-en="Cross-device profile sync">기기 간 프로필 동기화</li>
+      </ul>
+      <p class="status" data-en="Coming soon">준비중</p>
+    </article>
+  </div>
+</section>
+
+<section id="download">
+  <h2 data-en="Download">다운로드</h2>
+  <div class="store-cards">
+    <article class="store-card">
+      <h3>iOS</h3>
+      <p class="badge" data-en="App Store coming soon">App Store 준비중</p>
+      <p data-en="Today: sideload the ipa from GitHub Releases with AltStore or Sideloadly. Free Apple IDs need renewal every 7 days.">지금은 GitHub Releases의 ipa를 AltStore·Sideloadly로 사이드로딩할 수 있습니다. 무료 Apple ID는 7일마다 갱신이 필요합니다.</p>
+    </article>
+    <article class="store-card">
+      <h3>Android</h3>
+      <p class="badge" data-en="Google Play coming soon">Google Play 준비중</p>
+      <p data-en="APK will be available on GitHub Releases.">APK는 GitHub Releases에서 제공될 예정입니다.</p>
+    </article>
+  </div>
+  <a class="btn primary" href="https://github.com/deuxksy/AriaDM/releases/tag/v0.1.0" target="_blank" rel="noopener">GitHub Releases v0.1.0</a>
+</section>
+
+<section id="open-source">
+  <h2 data-en="Open Source">오픈소스</h2>
+  <p data-en="AriaDM is open source under the MIT license. Localization terms are reused from the AriaNg (MIT) project.">AriaDM은 MIT 라이선스로 공개되어 있습니다. 다국어 용어는 AriaNg(MIT) 프로젝트를 재사용했습니다.</p>
+  <div class="cta">
+    <a class="btn" href="https://github.com/deuxksy/AriaDM" target="_blank" rel="noopener" data-en="Source code">소스 코드</a>
+    <a class="btn primary" href="https://github.com/sponsors/deuxksy" target="_blank" rel="noopener" data-en="Sponsor on GitHub">GitHub Sponsors로 후원</a>
+  </div>
+</section>
+
+<footer>
+  <a href="https://github.com/deuxksy/AriaDM/blob/main/ROADMAP.md" target="_blank" rel="noopener" data-en="Roadmap">로드맵</a>
+  <a href="https://github.com/deuxksy/AriaDM/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+  <span>© 2026 AriaDM</span>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>
