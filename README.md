@@ -11,7 +11,7 @@ aria2 원격 제어 모바일 앱 (Android/iOS). React Native + Expo 단일 코�
 
 - 상태: **P0 완료** — 핵심 제어·완료 알림·다국어 4종 (iOS 실기기 검증 2026-08-22)
 - 스토어 등록명: AriaDM — aria2 Download Manager
-- 라이선스: 오픈소스 + Freemium (MVP 후 public 전환)
+- 라이선스: [MIT](LICENSE) · 오픈소스 + Freemium
 - Roadmap: P1 그래프·상세·다국어 확장 → P2 파일 브라우저 → Pro 클라우드 relay push
 
 ## 개발
