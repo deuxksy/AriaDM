@@ -21,6 +21,7 @@
 - `shared/` — format·base64·i18n(ko/en/zh/ja)·theme
 - `plugins/` — Expo config plugin (네이티브 빌드 설정의 Single Source of Truth)
 - `scripts/` — 테스트 보조 스크립트 · `docker/` — 통합 테스트 인프라 · `__tests__/` — 단위·통합 테스트
+- `website/` — 랜딩 페이지 (순수 HTML/CSS/JS · GitHub Pages `ariadm.zzizily.com` · 배포 `.github/workflows/website.yml`)
 
 ## iOS 빌드 (무료 Personal Team 서명)
 

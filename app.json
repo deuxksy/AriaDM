@@ -2,12 +2,13 @@
   "expo": {
     "name": "AriaDM",
     "slug": "ariadm",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "scheme": "ariadm",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
+      "buildNumber": "2",
       "supportsTablet": true,
       "bundleIdentifier": "com.zzizily.ariadm",
       "infoPlist": {
@@ -16,6 +17,7 @@
       }
     },
     "android": {
+      "versionCode": 1,
       "package": "com.zzizily.ariadm",
       "usesCleartextTraffic": true,
       "adaptiveIcon": {

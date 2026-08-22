@@ -9,13 +9,14 @@ aria2 원격 제어 모바일 앱 (Android/iOS). React Native + Expo 단일 코�
 
 ## 프로젝트 정보
 
-- 상태: **P0 완료** — 핵심 제어·완료 알림·다국어 4종 (iOS 실기기 검증 2026-08-22)
+- 상태: **v0.1.0 출시** (2026-08-22) — [웹사이트](https://ariadm.zzizily.com) · [Releases](https://github.com/deuxksy/AriaDM/releases/tag/v0.1.0)
 - 스토어 등록명: AriaDM — aria2 Download Manager
 - 라이선스: [MIT](LICENSE) · 오픈소스 + Freemium
 - Roadmap: [ROADMAP.md](ROADMAP.md) — 무료(Aria2-Explorer 수준) / Pro(그 이상) 경계 확정
 
 ## 개발
 
+- 게이트: `pnpm typecheck && pnpm test`
 - `pnpm it:docker` — docker aria2 통합 테스트 (자동 기동/정리)
 - `pnpm it:heritage` — heritage 운영 인스턴스 통합 테스트 (실데이터)
 - `pnpm start` — Metro 실행
