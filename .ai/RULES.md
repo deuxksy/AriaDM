@@ -11,6 +11,7 @@
 - `pnpm typecheck` — tsc --noEmit
 - `pnpm test` — 단위 테스트 (jest-expo, jest 29 고정 — jest-expo 57 호환)
 - `pnpm it:docker` — docker aria2 통합 테스트 (자동 기동/정리)
+- `pnpm it:heritage` — heritage 운영 인스턴스 통합 테스트 (실데이터, secret은 ssh 런타임 조회)
 
 ## 구조
 
@@ -18,6 +19,15 @@
 - `core/` — rpc(aria2 JSON-RPC)·notifications·iap
 - `features/` — 기능별 로직 (profiles, downloads, new-download, stats, settings)
 - `shared/` — format·base64·i18n(ko/en/zh/ja)·theme
+- `plugins/` — Expo config plugin (네이티브 빌드 설정의 Single Source of Truth)
+- `scripts/` — 테스트 보조 스크립트 · `docker/` — 통합 테스트 인프라 · `__tests__/` — 단위·통합 테스트
+
+## iOS 빌드 (무료 Personal Team 서명)
+
+- `aps-environment` entitlement 금지 — 무료 팀은 Push Notifications capability 미지원, `plugins/withNoApsEnvironment.js`가 제거
+- `ENABLE_USER_SCRIPT_SANDBOXING=NO` 필수 — react-native-xcode.sh가 앱 번들에 ip.txt를 기록하는데 샌드박싱이 이를 거부해 빌드 실패 (`plugins/withDevSigning.js`)
+- DEVELOPMENT_TEAM 등 네이티브 설정 변경은 반드시 `plugins/`의 config plugin으로 — `expo prebuild --clean`이 pbxproj를 재생성하므로 Xcode UI 직접 수정은 휘발된다
+- `ios/`·`android/`는 gitignore — 없으면 `pnpm exec expo prebuild`로 재생성, 커밋 금지
 
 ## 컨벤션
 
