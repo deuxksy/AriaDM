@@ -17,11 +17,17 @@ export const useSettings = create<SettingsState>((set) => ({
   notifyOnComplete: true,
   lang: 'auto',
   hydrate() {
-    const raw = mmkv.getString('settings');
-    const parsed = raw ? (JSON.parse(raw) as Partial<SettingsState>) : {};
-    const lang = parsed.lang ?? 'auto';
-    initLang(lang);
-    set({ notifyOnComplete: parsed.notifyOnComplete ?? true, lang });
+    // MMKV 손상 등으로 parse 실패 시 기본값 폴백 — 부팅 루프 크래시 방지
+    try {
+      const raw = mmkv.getString('settings');
+      const parsed = raw ? (JSON.parse(raw) as Partial<SettingsState>) : {};
+      const lang = parsed.lang ?? 'auto';
+      initLang(lang);
+      set({ notifyOnComplete: parsed.notifyOnComplete ?? true, lang });
+    } catch {
+      initLang('auto');
+      set({ notifyOnComplete: true, lang: 'auto' });
+    }
   },
   setNotify(v) {
     mmkv.set('settings', JSON.stringify({ notifyOnComplete: v, lang: useSettings.getState().lang }));

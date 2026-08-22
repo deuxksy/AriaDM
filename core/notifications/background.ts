@@ -5,6 +5,7 @@ import { createMMKV } from 'react-native-mmkv';
 import { Aria2Connection } from '../rpc/connection';
 import { createProfileStorage } from '../../features/profiles/storage';
 import { useProfiles, getActiveProfile } from '../../features/profiles/store';
+import { useSettings } from '../../features/settings/store';
 import { runCompletionCheck, type SeenStore } from './check';
 import { notifyComplete } from './notifications';
 
@@ -19,6 +20,9 @@ export const mmkvSeen: SeenStore = {
 // 모듈 최상위 정의 — background headless 기동 시 React 컴포넌트가 마운트되지 않아도
 // JS 번들 로드만으로 task가 등록된다. 프로필은 실행 시점에 저장소에서 조회 (closure 캡처 금지).
 TaskManager.defineTask(BG_TASK, async () => {
+  // headless 기동 시에도 사용자 설정 반영 — settings.hydrate는 MMKV 동기 읽기라 안전
+  useSettings.getState().hydrate();
+  if (!useSettings.getState().notifyOnComplete) return;
   const profilesState = useProfiles.getState();
   if (!profilesState.hydrated) await profilesState.hydrate(createProfileStorage()); // headless 기동 대비
   const profile = getActiveProfile(useProfiles.getState());

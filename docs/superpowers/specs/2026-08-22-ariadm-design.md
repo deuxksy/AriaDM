@@ -122,7 +122,7 @@ shared/                 — 공통 UI 컴포넌트, i18n(ko/en), 유틸
 graph TD
     A[aria2 daemon - 다운로드 완료] --> B{앱 상태}
     B -->|Foreground| C[WS notification 즉시 수신]
-    B -->|Background| D[OS 스케줄러 - BGAppRefresh 또는 WorkManager]
+    B -->|Background| D[OS 스케줄러 - iOS BGProcessingTask 또는 WorkManager]
     C --> E[expo-notifications 로컬 알림 발사]
     D --> F[tellStopped 조회 - MMKV 완료집합과 diff]
     F -->|신규 완료| E
@@ -131,7 +131,7 @@ graph TD
 ```
 
 1. **Foreground**: WS `onDownloadComplete` → 즉시 로컬 알림
-2. **Background iOS**: `BGAppRefreshTask` — OS 재량 주기(수 분~수 시간)로 앱 기상 → `tellStopped` diff → 신규 완료 알림
+2. **Background iOS**: `expo-background-task`는 iOS에서 `BGProcessingTask`(processing 백그라운드 모드)로 스케줄 — OS 재량 주기(수 분~수 시간)로 앱 기상 → `tellStopped` diff → 신규 완료 알림. 단 `app.json` plugins에 `expo-background-task` config plugin 등록 필수: plugin이 Info.plist의 `BGTaskSchedulerPermittedIdentifiers`와 `UIBackgroundModes: "processing"`을 자동 추가하며, 미등록 시 iOS 런치 시점 크래시 + background 폴링 무효
 3. **Background Android**: WorkManager(`expo-background-task`, 최소 15분) 동일 로직 — iOS보다 예측 가능
 4. 완료 관측 집합은 MMKV에 저장해 중복 알림 방지
 5. OS 제약상 지연 가능성을 설정 화면·스토어 설명에 명시 (심사 안전)

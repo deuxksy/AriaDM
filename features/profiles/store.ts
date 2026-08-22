@@ -35,8 +35,13 @@ export const useProfiles = create<ProfilesState>((set, get) => ({
   hydrated: false,
   storage: null,
   async hydrate(storage) {
-    const { profiles, activeId } = await storage.load();
-    set({ profiles, activeId, hydrated: true, storage });
+    try {
+      const { profiles, activeId } = await storage.load();
+      set({ profiles, activeId, hydrated: true, storage });
+    } catch {
+      // 조회 실패 시에도 storage/hydrated set — storage:null no-op로 인한 silent data loss 방지
+      set({ profiles: [], activeId: null, hydrated: true, storage });
+    }
   },
   persist(profiles: Profile[], activeId: string | null) {
     // fire-and-forget — 저장 실패는 경고만 (UI 차단 안 함)
