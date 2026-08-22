@@ -1,0 +1,33 @@
+# gitleaks 설정 — commit 시 secret 스캔 (.ai/RULES.md: secret repo 저장 금지)
+title = "AriaDM gitleaks config"
+
+[extend]
+# 내장 룰(API key·클라우드 자격 등) 전체 유지
+useDefault = true
+
+# aria2 rpc-secret 실수 커밋 방지
+[[rules]]
+id = "aria2-rpc-secret"
+description = "aria2 rpc-secret 값"
+regex = '''(?i)rpc-secret[=:]\s*["']?([A-Za-z0-9_-]{4,})'''
+secretGroup = 1
+tags = ["aria2", "secret"]
+
+# tripwire — heritage가 p3terx 이미지 기본 secret을 쓰는 중.
+# 문서·코드·스크립트로 유입되면 즉시 차단 (값 자체는 이미지 공개 기본값이라 설정 파일 내 정의는 무해)
+[[rules]]
+id = "heritage-default-secret"
+description = "p3terx/aria2-pro 기본 secret — heritage 운영값, 문서·코드 유출 방지"
+regex = '''P3TERX'''
+tags = ["aria2", "heritage"]
+
+[allowlist]
+description = "공개 테스트 고정값·키 목록 문서 — RULES.md에 문서화된 예외"
+paths = [
+  '''(^|/)\.env\.example$''',
+  '''\.gitleaks\.toml$''',
+]
+regexes = [
+  # docker 통합 테스트 고정값 — localhost 전용 컨테이너, 공개 무가치
+  '''it-secret''',
+]
