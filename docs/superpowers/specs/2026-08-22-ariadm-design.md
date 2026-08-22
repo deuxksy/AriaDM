@@ -138,14 +138,14 @@ graph TD
 ## 보안
 
 - rpc-secret: `expo-secure-store` (iOS Keychain / Android Keystore). AsyncStorage 금지
-- TLS: 프로필별 인증서 검증 옵션. 기본 on, self-signed 허용 토글 시 경고. `ws://` 평문 허용(사설망 권장 안내)
+- TLS: `https`(유효 CA)와 `http` 지원. self-signed 인증서 허용 토글은 v1 미지원 (RN fetch가 인증서 검증 예외 불가) — 사설망에서는 Tailscale 내부 `http` 권장
 - v1 telemetry/애널리틱스 없음. Crash reporting은 opt-in 토글(기본 off)
 - 오픈소스 공개 시 secret 유출 경로 자체가 부재 (모든 자격은 기기 로컬)
 
 ## 에러 처리
 
 - 연결 상태 chip 상시 표시: `connecting / connected / degraded-HTTP / disconnected`
-- 프로필 연결 테스트 진단 분기: port 닫힘(데몬 미구동) vs 인증 실패(secret 오류) vs TLS 오류
+- 프로필 연결 테스트 진단 분기: 인증 실패(secret 오류) vs 도달 불가(포트 차단·TLS·네트워크 — RN fetch 제약으로 상세 원인 분류 불가, 원인 후보 안내)
 - aria2 RPC 에러 코드 → ko/en 친화 메시지 매핑 테이블
 - 네트워크 전환(NetInfo) → 즉시 재연결
 
