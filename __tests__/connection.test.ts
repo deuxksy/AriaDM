@@ -107,6 +107,22 @@ test('reconnectNow — 백오프 무시 즉시 WS 재시도', () => {
   expect(c.getState()).toBe('connected');
 });
 
+test('백오프 대기 중 reconnectNow — 타이머 해제로 소켓 이중 생성 방지', async () => {
+  const sockets: FakeWs[] = [];
+  const c = new Aria2Connection(CFG, {
+    wsFactory: () => { const w = new FakeWs(); sockets.push(w); return w; },
+    fetchImpl: httpOk(null),
+    backoffBaseMs: 20, // 백오프 대기 타이머가 테스트 내에 만료되도록
+  });
+  c.start();          // sockets[0]
+  sockets[0].close(); // 실패 1회 → 20ms 백오프 예약
+  c.reconnectNow();   // 즉시 재시도 → sockets[1]
+  await new Promise((r) => setTimeout(r, 60)); // 백오프 시간 경과
+  // 예약된 백오프 타이머가 재발동하면 sockets[2]가 추가 생성됨
+  expect(sockets.length).toBe(2);
+  c.stop();
+});
+
 test('stop 후 상태 disconnected', () => {
   const ws = new FakeWs();
   const c = new Aria2Connection(CFG, { wsFactory: () => ws, fetchImpl: httpOk(null) });

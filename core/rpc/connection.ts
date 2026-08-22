@@ -151,6 +151,7 @@ export class Aria2Connection {
   reconnectNow(): void {
     if (this.stopped) return;
     if (this.degradeTimer) clearTimeout(this.degradeTimer);
+    if (this.backoffTimer) clearTimeout(this.backoffTimer); // 대기 중 백오프가 재발동해 소켓을 이중 생성하는 경로 차단
     this.wsFailures = 0;
     const old = this.ws;
     this.ws = null;
