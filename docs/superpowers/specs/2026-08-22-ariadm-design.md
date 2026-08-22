@@ -181,6 +181,18 @@ graph TD
 | E2E | smoke: URL 추가 → 목록 등장 → 일시정지 → 재개 | Maestro |
 | 실기기 | Android WiFi 배포 자동화 | dev:deploy-android-wifi |
 
+### 테스트 환경 (실제 운영 대상 — homelab heritage)
+
+| 항목 | 값 |
+| :--- | :--- |
+| 대상 | heritage LXC 200 — `p3terx/aria2-pro:test` (aria2 1.36.0) |
+| Endpoint | `http://100.96.115.19:6800/jsonrpc` (Tailscale 망 내부) |
+| WebSocket | `/jsonrpc` WS upgrade 검증 완료 (101) |
+| 인증 | rpc-secret — 컨테이너 `/config/aria2.conf` 소유. **repo에 절대 저장 금지**, 개발 시 ssh로 조회해 로컬 `.env`(gitignore) 사용 |
+| 데이터 특성 | 운영 인스턴스 — active/waiting 500+/stopped 600+ → 대용량 목록 pagination 검증에 활용 |
+
+SSH 접근: `ssh heritage` (Tailscale). CI에서는 docker-compose 기동한 격리 aria2만 사용하고, 실운영 인스턴스는 수동/실기기 테스트 전용이다.
+
 ## 배포
 
 - GitHub: `deuxksy/AriaDM` — **private 시작, MVP 완성 후 public 전환**
@@ -204,3 +216,4 @@ graph TD
 | 아키텍처 | WebSocket 중심 + HTTP fallback | 실시간성·배터리 효율 | 2026-08-22 |
 | 버전 정책 | 전부 최신 | 요구사항 | 2026-08-22 |
 | 이름 | AriaDM | AriaNG 컨벤션 계승, DM=Download Manager 자명, 충돌 없음 | 2026-08-22 |
+| 테스트 대상 | homelab heritage aria2 (운영 인스턴스) | 실데이터 검증, WS 동작 확인 | 2026-08-22 |
