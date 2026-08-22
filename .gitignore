@@ -42,3 +42,6 @@ expo-env.d.ts
 # Test coverage
 coverage/
 .claude/
+
+# Release build 산출물 (xcarchive·ipa)
+build/
