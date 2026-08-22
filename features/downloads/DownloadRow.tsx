@@ -2,6 +2,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { DownloadInfo } from '../../core/rpc/types';
 import { downloadName, formatBytes, formatEta, formatSpeed, progressPercent } from '../../shared/format';
+import { t } from '../../shared/i18n';
 import { theme } from '../../shared/theme';
 
 export function DownloadRow({
@@ -27,9 +28,9 @@ export function DownloadRow({
           <Text numberOfLines={1} style={{ fontSize: 15, color: theme.text }}>{downloadName(info)}</Text>
           <Text style={{ fontSize: 12, color: theme.muted, marginTop: 2 }}>
             {info.status === 'active'
-              ? `${formatSpeed(speed)} · ${formatEta(eta)} 남음`
+              ? `${formatSpeed(speed)} · ${formatEta(eta)} ${t('row_remaining')}`
               : info.status === 'error'
-                ? `오류 ${info.errorCode}: ${info.errorMessage}`
+                ? t('row_error', { code: info.errorCode, msg: info.errorMessage })
                 : `${formatBytes(done)} / ${formatBytes(total)}`}
           </Text>
         </View>

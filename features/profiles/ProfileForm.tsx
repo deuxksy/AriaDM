@@ -64,7 +64,9 @@ export function ProfileForm() {
       </View>
       <Text style={{ color: theme.muted }}>{t('profile_secret')}</Text>
       <TextInput value={secret} onChangeText={setSecret} autoCapitalize="none" autoCorrect={false} secureTextEntry style={input} />
-      <Pressable onPress={test} style={{ padding: 16, alignItems: 'center', borderRadius: theme.radius, borderWidth: 1, borderColor: theme.accent }}>
+      {/* 진단 진행 중 중복 탭 방지 (T10 이월) */}
+      <Pressable onPress={test} disabled={testing}
+        style={{ padding: 16, alignItems: 'center', borderRadius: theme.radius, borderWidth: 1, borderColor: theme.accent, opacity: testing ? 0.6 : 1 }}>
         {testing ? <ActivityIndicator color={theme.accent} /> : <Text style={{ color: theme.accent }}>{t('profile_test')}</Text>}
       </Pressable>
       <Pressable onPress={save} disabled={!host.trim() || !name.trim()}

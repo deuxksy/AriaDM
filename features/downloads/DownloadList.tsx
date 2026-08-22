@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { useRouter, type Href } from 'expo-router';
+import { Alert, FlatList, Text, View } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useDownloads, useGlobalStat, useControl } from './queries';
 import { SEGMENTS, SEG_TO_KIND, filterBySegment, type SegmentKey } from './segments';
 import { DownloadRow } from './DownloadRow';
@@ -44,14 +44,16 @@ export function DownloadList() {
       <FlatList
         data={items}
         keyExtractor={(d) => d.gid}
-        onEndReached={() => { if (kind !== 'active') setLimit((l) => l + 100); }}
+        onEndReached={() => { if (kind !== 'active' && items.length >= limit) setLimit((l) => l + 100); }}
         onEndReachedThreshold={0.5}
         renderItem={({ item }) => (
           <DownloadRow
             info={item}
-            // /modal/[gid] route 파일은 상세 화면 task가 생성 — router.d.ts 재생성 전까지 캐스트
-            onOpen={(gid) => router.push(`/modal/${gid}` as Href)}
-            onPauseResume={(gid, paused) => (paused ? control.resume.mutateAsync(gid) : control.pause.mutateAsync(gid))}
+            onOpen={(gid) => router.push(`/modal/${gid}`)}
+            // 제어 실패가 무음이 되지 않게 (T8 ruling)
+            onPauseResume={(gid, paused) =>
+              (paused ? control.resume.mutateAsync(gid) : control.pause.mutateAsync(gid))
+                .catch((e: Error) => Alert.alert('AriaDM', `${t('control_failed')}: ${e.message}`))}
           />
         )}
         ListEmptyComponent={<Text style={{ color: theme.muted, textAlign: 'center', marginTop: 40 }}>-</Text>}

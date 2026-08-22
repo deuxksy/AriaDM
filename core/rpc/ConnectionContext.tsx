@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import NetInfo from '@react-native-community/netinfo';
-import { router, type Href } from 'expo-router';
+import { router } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 import { Aria2Connection } from './connection';
 import { Aria2 } from './methods';
@@ -66,7 +66,8 @@ export function ConnectionProvider({ children }: { children: React.ReactNode }) 
         const info = await Aria2.tellStatus(c, e.gid).catch(() => null);
         const seen = new Set(mmkvSeen.load());
         if (!seen.has(e.gid)) {
-          await notifyComplete(info ? downloadName(info) : e.gid, e.gid);
+          // 권한 회수·네이티브 오류 시 unhandled rejection 방지 (T11 이월)
+          await notifyComplete(info ? downloadName(info) : e.gid, e.gid).catch(() => undefined);
           seen.add(e.gid);
           mmkvSeen.save([...seen].slice(-300));
         }
@@ -86,12 +87,11 @@ export function ConnectionProvider({ children }: { children: React.ReactNode }) 
     // 기본값 true지만 권한이 없으면 알림 불가 — 시작 시 1회 요청하고 거부 시 기능 off
     ensurePermission().then((granted) => {
       if (!granted && useSettings.getState().notifyOnComplete) useSettings.getState().setNotify(false);
-    });
+    }).catch(() => undefined); // 권한 API 거부·오류 시 unhandled 방지 (T11 이월)
     registerBackgroundTask().catch(() => undefined);
     const sub = Notifications.addNotificationResponseReceivedListener((resp) => {
       const gid = (resp.notification.request.content.data as { gid?: string } | undefined)?.gid;
-      // /modal/[gid] route 파일은 상세 화면 task가 생성 — router.d.ts 재생성 전까지 캐스트
-      if (typeof gid === 'string') router.push(`/modal/${gid}` as Href);
+      if (typeof gid === 'string') router.push(`/modal/${gid}`);
     });
     return () => sub.remove();
   }, []);
