@@ -143,11 +143,15 @@ graph TD
 - aria2 RPC 에러 코드 → ko/en 친화 메시지 매핑 테이블
 - 네트워크 전환(NetInfo) → 즉시 재연결
 
-## 수익 모델 — IAP
+## 수익 모델 — IAP 하이브리드 + 후원
 
-- v1: **전 기능 무료** 출시. IAP scaffold는 **entitlement 경계 인터페이스**(`isPro()` 등)만 포함 — `react-native-purchases` SDK 설치·RevenueCat 연동은 Pro 기능(relay push) 출시 시점에 추가 (유휴 의존성 방지)
-- 유료 전환 시점 = 클라우드 relay push 출시. Pro = relay push + 파일 브라우저(P2)
-- 결제(출시 시점): react-native-purchases (StoreKit 2 / Play Billing 래핑) — 자체 검증 서버 불필요
+- **과금 구조 (C 하이브리드, 2026-08-22 확정)**:
+  - **Pro 평생 구매 $9.99** — 클라이언트 기능: 속도 그래프·파일 브라우저·통계·위젯·자동화
+  - **Cloud 구독 $0.99/월 · $9.99/년** — 서버 기능: relay push·클라우드 동기화 (서버 비용 반복 → 구독으로 비용 대칭)
+- 근거: 비용 구조 일치 + MIT 오픈소스에서 클라이언트 게이트는 fork로 우회 가능하나 **서버 기반 Pro는 우회 불가** — 실제 결제 벽
+- **보완 수익**: GitHub Sponsors (수수료 0, 오픈소스 사용자층 후원)
+- v1: 전 기능 무료 출시. IAP scaffold는 entitlement 인터페이스(`isPro()` 등)만 포함 — `react-native-purchases` 연동은 Pro 기능 출시 시점
+- 결제 인프라: RevenueCat (entitlement `pro`·`cloud` 2종, StoreKit 2 / Play Billing 래핑) — Small Business Program 15% 양 스토어 등록 전제
 
 ## 기술 스택
 
@@ -224,4 +228,5 @@ SSH 접근: `ssh heritage` (Tailscale). CI에서는 docker-compose 기동한 격
 | 테스트 대상 | homelab heritage aria2 (운영 인스턴스) | 실데이터 검증, WS 동작 확인 | 2026-08-22 |
 | 스토어 계정 | dev@zzizily.com 전용 + Personal 등록 | 운영 분리·보안, 이후 조직 이전 가능 | 2026-08-22 |
 | Freemium 경계 | 무료 = Aria2-Explorer(AriaNg 내장) 수준, Pro = 그 이상의 모바일 고유 가치(그래프·relay·파일 브라우저·통계·동기화·위젯·자동화) | 채택 확보 후 수익 — ROADMAP.md가 SSOT | 2026-08-22 |
+| 과금 모델 | C 하이브리드: Pro 평생 $9.99(클라이언트) + Cloud 구독 $0.99/월·$9.99/년(서버) + GitHub Sponsors 보완 | 비용 대칭 — 서버 기능이 우회 불가 결제 벽 | 2026-08-22 |
 | 공개 전환 | v0.1.0 달성으로 MIT 라이선스와 함께 public 전환 | 사전 합의 조건 달성, 커뮤니티 번역 길 확보 | 2026-08-22 |
