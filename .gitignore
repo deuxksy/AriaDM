@@ -1,12 +1,32 @@
 # macOS
 .DS_Store
+*.pem
 
 # Node
 node_modules/
+npm-debug.*
+yarn-debug.*
+yarn-error.*
 
 # Expo
 .expo/
 dist/
+web-build/
+expo-env.d.ts
+
+# Native (scaffold 템플릿 항목)
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+/ios
+/android
+
+# Metro
+.metro-health-check*
 
 # OMC operational artifacts
 .omc/
@@ -15,6 +35,9 @@ dist/
 .env
 .env.*
 !.env.example
+
+# TypeScript
+*.tsbuildinfo
 
 # Test coverage
 coverage/

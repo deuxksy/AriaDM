@@ -1,0 +1,18 @@
+services:
+  aria2:
+    image: p3terx/aria2-pro:test
+    environment:
+      - RPC_SECRET=it-secret
+      - RPC_PORT=6800
+      - TZ=Asia/Seoul
+    ports:
+      - "6800:6800"
+    volumes:
+      - aria2-downloads:/downloads
+  fileserver:
+    image: nginx:alpine
+    ports:
+      - "8088:80"
+    command: sh -c "head -c 1048576 /dev/urandom > /usr/share/nginx/html/testfile.bin && nginx -g 'daemon off;'"
+volumes:
+  aria2-downloads:
