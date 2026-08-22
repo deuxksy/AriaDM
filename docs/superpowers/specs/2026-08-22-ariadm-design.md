@@ -109,7 +109,7 @@ shared/                 — 공통 UI 컴포넌트, i18n(ko/en), 유틸
 
 | 화면 | 구성 |
 | :--- | :--- |
-| 다운로드 | segmented control(iOS)/Material tabs(Android): 진행·대기·완료·중지. 행 = 파일명, progress bar, 속도, 잔여. swipe/long-press 액션: 일시정지·재개·삭제 |
+| 다운로드 | segmented control(iOS)/Material tabs(Android): 진행·대기·완료·실패(error·removed). 행 = 파일명, progress bar, 속도, 잔여 + 일시정지·재개 아이콘. 탭→상세 화면에서 삭제 |
 | 추가 | URL/magnet 입력창, torrent 파일 피커, 옵션(출력 경로, 분할 수) |
 | 설정 | 프로필 전환·관리, 알림 on/off, 표시 설정, Pro 업그레이드 |
 | 프로필 편집 (모달) | 이름, host, port, rpc-secret, TLS 옵션 + 연결 테스트 버튼 |
