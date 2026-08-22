@@ -202,6 +202,14 @@ SSH 접근: `ssh heritage` (Tailscale). CI에서는 docker-compose 기동한 격
 - 빌드: EAS Build (무료 티어 quota 내), 초과 시 로컬 빌드
 - 스토어 등록명: **AriaDM — aria2 Download Manager** (검색 키워드 aria2 노출)
 
+### 스토어 계정 전략
+
+- 전용 계정: `dev@zzizily.com` (Google Workspace zzizily.com에서 생성) — 개인 계정과 운영 분리
+- 등록 유형: Google Play·Apple 모두 **Personal/Individual** (사업자 부재)
+- Google Play 신규 개인 계정 요건 — 폐쇄 테스트 **12명 × 14일** 옵트인: 오픈소스 베타 프로그램으로 충족
+- Apple Individual: seller에 실명 노출 (Apple 정책, 법인 설립 전 불가피)
+- 사업자 설립 시 조직 계정으로 이전 (Play 앱 이전, Apple 이관 모두 공식 지원)
+
 ## 결정 로그
 
 | 결정 | 선택 | 근거 | 일자 |
@@ -217,3 +225,4 @@ SSH 접근: `ssh heritage` (Tailscale). CI에서는 docker-compose 기동한 격
 | 버전 정책 | 전부 최신 | 요구사항 | 2026-08-22 |
 | 이름 | AriaDM | AriaNG 컨벤션 계승, DM=Download Manager 자명, 충돌 없음 | 2026-08-22 |
 | 테스트 대상 | homelab heritage aria2 (운영 인스턴스) | 실데이터 검증, WS 동작 확인 | 2026-08-22 |
+| 스토어 계정 | dev@zzizily.com 전용 + Personal 등록 | 운영 분리·보안, 이후 조직 이전 가능 | 2026-08-22 |
