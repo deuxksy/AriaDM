@@ -23,7 +23,6 @@
     "android": {
       "versionCode": 1,
       "package": "com.zzizily.ariadm",
-      "usesCleartextTraffic": true,
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -38,6 +37,7 @@
     "plugins": [
       "./plugins/withNoApsEnvironment",
       "./plugins/withDevSigning",
+      "./plugins/withCleartextHttp",
       "expo-router",
       "expo-notifications",
       "expo-background-task"

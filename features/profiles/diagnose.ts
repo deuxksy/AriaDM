@@ -20,7 +20,8 @@ export async function diagnose(
     };
     if (body.error) return { ok: false, kind: 'auth' };
     return { ok: true, version: body.result?.version ?? '?' };
-  } catch {
+  } catch (e) {
+    console.warn('[diag]', `${cfg.scheme}://${cfg.host}:${cfg.port}`, e instanceof Error ? `${e.message} ${String((e as Error & { cause?: unknown }).cause ?? '')}` : String(e));
     return { ok: false, kind: 'unreachable' };
   }
 }

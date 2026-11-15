@@ -30,6 +30,12 @@
 - DEVELOPMENT_TEAM 등 네이티브 설정 변경은 반드시 `plugins/`의 config plugin으로 — `expo prebuild --clean`이 pbxproj를 재생성하므로 Xcode UI 직접 수정은 휘발된다
 - `ios/`·`android/`는 gitignore — 없으면 `pnpm exec expo prebuild`로 재생성, 커밋 금지
 
+## Android 빌드 (로컬)
+
+- release: `JAVA_HOME=$(/usr/libexec/java_home -v 21) android/gradlew -p android assembleRelease` — 산출물 `android/app/build/outputs/apk/release/app-release.apk`
+- `expo prebuild`가 `android/local.properties`를 지울 수 있음 — "SDK location not found" 실패 시 `sdk.dir`(SDK 실제 경로) 재작성 필요
+- Expo 57은 app.json `usesCleartextTraffic` 키 미지원(조용히 무시) — http RPC 허용은 `plugins/withCleartextHttp.js`가 manifest에 주입
+
 ## 컨벤션
 
 - 주석·커밋 메시지 한국어, Conventional Commits (type은 영어, 설명은 한국어)
