@@ -49,4 +49,8 @@ export const zh: Partial<Dict> = {
   row_error: '错误 {code}: {msg}',
   detail_title: '详情',
   control_failed: '操作失败',
+  conn_connecting: '连接中',
+  conn_connected: '已连接',
+  conn_degraded: '轮询模式',
+  conn_disconnected: '未连接',
 };

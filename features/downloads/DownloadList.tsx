@@ -3,6 +3,7 @@ import { Alert, FlatList, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDownloads, useGlobalStat, useControl } from './queries';
 import { SEGMENTS, SEG_TO_KIND, filterBySegment, type SegmentKey } from './segments';
+import { CONN_STATE_META } from './connState';
 import { DownloadRow } from './DownloadRow';
 import { useConnection } from '../../core/rpc/ConnectionContext';
 import { t } from '../../shared/i18n';
@@ -17,7 +18,7 @@ export function DownloadList() {
   const stopped = useDownloads('stopped', limit);
   const stat = useGlobalStat();
   const control = useControl();
-  const { profile } = useConnection();
+  const { state, profile } = useConnection();
   const router = useRouter();
 
   const kind = SEG_TO_KIND[seg];
@@ -31,9 +32,16 @@ export function DownloadList() {
   return (
     <View style={{ flex: 1, backgroundColor: theme.bg }}>
       <View style={{ flexDirection: 'row', padding: 10, gap: 6 }}>
-        <Text style={{ color: theme.muted, flex: 1 }}>
-          ↓ {formatSpeed(Number(stat.data?.downloadSpeed ?? 0))}  ↑ {formatSpeed(Number(stat.data?.uploadSpeed ?? 0))}
-        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, flex: 1 }}>
+          {/* 연결 상태 배지 — 연결 실패가 빈 목록처럼 보이지 않게 */}
+          <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: CONN_STATE_META[state].color }} />
+          {state !== 'connected' && (
+            <Text style={{ color: theme.muted, fontSize: 12 }}>{t(CONN_STATE_META[state].key)}</Text>
+          )}
+          <Text style={{ color: theme.muted, flex: 1 }}>
+            ↓ {formatSpeed(Number(stat.data?.downloadSpeed ?? 0))}  ↑ {formatSpeed(Number(stat.data?.uploadSpeed ?? 0))}
+          </Text>
+        </View>
         {SEGMENTS.map((s) => (
           <Text key={s.key} onPress={() => setSeg(s.key)}
             style={{ color: seg === s.key ? theme.accent : theme.muted, fontWeight: seg === s.key ? '700' : '400' }}>

@@ -47,6 +47,10 @@ export const en = {
   row_error: 'Error {code}: {msg}',
   detail_title: 'Details',
   control_failed: 'Control failed',
+  conn_connecting: 'Connecting',
+  conn_connected: 'Connected',
+  conn_degraded: 'Polling',
+  conn_disconnected: 'Offline',
 } as const;
 
 export type DictKey = keyof typeof en;

@@ -83,6 +83,7 @@ export function AddForm() {
         value={uri}
         onChangeText={setUri}
         placeholder={t('add_uri_placeholder')}
+        placeholderTextColor={theme.muted}
         autoCapitalize="none"
         autoCorrect={false}
         keyboardType="url"
@@ -92,6 +93,7 @@ export function AddForm() {
         value={dir}
         onChangeText={setDir}
         placeholder={t('add_dir_placeholder')}
+        placeholderTextColor={theme.muted}
         autoCapitalize="none"
         autoCorrect={false}
         style={{ backgroundColor: theme.card, borderRadius: theme.radius, padding: 14, color: theme.text }}
@@ -101,6 +103,7 @@ export function AddForm() {
           value={out}
           onChangeText={setOut}
           placeholder={t('add_out_placeholder')}
+        placeholderTextColor={theme.muted}
           autoCapitalize="none"
           autoCorrect={false}
           style={{ flex: 1, backgroundColor: theme.card, borderRadius: theme.radius, padding: 14, color: theme.text }}
@@ -109,6 +112,7 @@ export function AddForm() {
           value={split}
           onChangeText={setSplit}
           placeholder={t('add_split_placeholder')}
+        placeholderTextColor={theme.muted}
           keyboardType="number-pad"
           style={{ flex: 1, backgroundColor: theme.card, borderRadius: theme.radius, padding: 14, color: theme.text }}
         />

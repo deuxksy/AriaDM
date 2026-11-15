@@ -50,4 +50,8 @@ export const ko: Partial<Dict> = {
   row_error: '오류 {code}: {msg}',
   detail_title: '상세',
   control_failed: '제어 실패',
+  conn_connecting: '연결 중',
+  conn_connected: '연결됨',
+  conn_degraded: '폴링 모드',
+  conn_disconnected: '연결 안 됨',
 };

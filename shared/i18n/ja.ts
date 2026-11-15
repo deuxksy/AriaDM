@@ -49,4 +49,8 @@ export const ja: Partial<Dict> = {
   row_error: 'エラー {code}: {msg}',
   detail_title: '詳細',
   control_failed: '操作に失敗しました',
+  conn_connecting: '接続中',
+  conn_connected: '接続済み',
+  conn_degraded: 'ポーリングモード',
+  conn_disconnected: '未接続',
 };
