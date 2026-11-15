@@ -4,6 +4,7 @@ export const ja: Partial<Dict> = {
   tab_downloads: 'ダウンロード',
   tab_add: '追加',
   tab_settings: '設定',
+  seg_all: 'すべて',
   seg_active: '実行中',
   seg_waiting: '待機中',
   seg_complete: '完了',

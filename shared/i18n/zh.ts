@@ -4,6 +4,7 @@ export const zh: Partial<Dict> = {
   tab_downloads: '下载',
   tab_add: '添加',
   tab_settings: '设置',
+  seg_all: '全部',
   seg_active: '进行中',
   seg_waiting: '等待中',
   seg_complete: '已完成',

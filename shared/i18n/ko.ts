@@ -5,6 +5,7 @@ export const ko: Partial<Dict> = {
   tab_downloads: '다운로드',
   tab_add: '추가',
   tab_settings: '설정',
+  seg_all: '전체',
   seg_active: '진행',
   seg_waiting: '대기',
   seg_complete: '완료',

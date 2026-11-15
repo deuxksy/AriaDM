@@ -22,7 +22,10 @@ export function DownloadList() {
   const router = useRouter();
 
   const kind = SEG_TO_KIND[seg];
-  const src = kind === 'active' ? active.data : kind === 'waiting' ? waiting.data : stopped.data;
+  // 'all'은 3종 쿼리 병합 — aria2가 active/waiting/stopped에 mutually exclusive로 분배하므로 중복 없음
+  const src = seg === 'all'
+    ? [...(active.data ?? []), ...(waiting.data ?? []), ...(stopped.data ?? [])]
+    : kind === 'active' ? active.data : kind === 'waiting' ? waiting.data : stopped.data;
   const items = filterBySegment(src ?? [], seg);
 
   if (!profile) {

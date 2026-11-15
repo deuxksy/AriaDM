@@ -2,6 +2,7 @@ export const en = {
   tab_downloads: 'Downloads',
   tab_add: 'Add',
   tab_settings: 'Settings',
+  seg_all: 'All',
   seg_active: 'Active',
   seg_waiting: 'Waiting',
   seg_complete: 'Complete',
