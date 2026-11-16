@@ -17,8 +17,8 @@
 
 - `app/` — expo-router 라우팅
 - `core/` — rpc(aria2 JSON-RPC)·notifications·iap
-- `features/` — 기능별 로직 (profiles, downloads, new-download, stats, settings)
-- `shared/` — format·base64·i18n(ko/en/zh/ja)·theme
+- `features/` — 기능별 로직 (profiles, downloads, new-download, settings)
+- `shared/` — format·base64·i18n(ko/en/zh/ja)·theme(팔레트)·ThemeContext(공급)·ConnChip
 - `plugins/` — Expo config plugin (네이티브 빌드 설정의 Single Source of Truth)
 - `scripts/` — 테스트 보조 스크립트 · `docker/` — 통합 테스트 인프라 · `__tests__/` — 단위·통합 테스트
 - `website/` — 랜딩 페이지 (순수 HTML/CSS/JS · GitHub Pages `ariadm.zzizily.com` · 배포 `.github/workflows/website.yml`)
@@ -41,6 +41,7 @@
 - 주석·커밋 메시지 한국어, Conventional Commits (type은 영어, 설명은 한국어)
 - secret은 repo에 절대 커밋 금지 — `.env`(gitignore)만 사용, 키 목록은 `.env.example`
 - 통합 테스트 secret(`it-secret`)은 docker-compose 고정 테스트 값으로 유일한 예외
+- Jest에서 react-native-mmkv(Nitro) 네이티브 부재 — `jest.setup.js`가 전역 인메모리 mock 제공(삭제 API는 v4 기준 `remove`, `delete` 아님). store를 import하는 테스트는 이 mock 위에서 동작
 
 ## 문서
 

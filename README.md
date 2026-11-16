@@ -9,7 +9,7 @@ aria2 원격 제어 모바일 앱 (Android/iOS). React Native + Expo 단일 코�
 
 ## 프로젝트 정보
 
-- 상태: **v0.1.0 출시** (2026-08-22) — [웹사이트](https://ariadm.zzizily.com) · [Releases](https://github.com/deuxksy/AriaDM/releases/tag/v0.1.0)
+- 상태: **v0.2.0** (2026-08-22 범프) — [웹사이트](https://ariadm.zzizily.com) · [Releases](https://github.com/deuxksy/AriaDM/releases)
 - 스토어 등록명: AriaDM — aria2 Download Manager
 - 라이선스: [MIT](LICENSE) · 오픈소스 + Freemium
 - Roadmap: [ROADMAP.md](ROADMAP.md) — 무료(Aria2-Explorer 수준) / Pro(그 이상) 경계 확정
