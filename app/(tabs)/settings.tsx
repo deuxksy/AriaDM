@@ -5,12 +5,13 @@ import { useSettings } from '../../features/settings/store';
 import { ensurePermission } from '../../core/notifications/notifications';
 import { isPro } from '../../core/iap/entitlement';
 import { availableLangs, t } from '../../shared/i18n';
-import { theme } from '../../shared/theme';
+import { useTheme } from '../../shared/ThemeContext';
 
 export default function SettingsScreen() {
   const router = useRouter();
   const { profiles, activeId, setActive } = useProfiles();
-  const { notifyOnComplete, setNotify, lang, setLang } = useSettings();
+  const { notifyOnComplete, setNotify, lang, setLang, themeMode, setTheme } = useSettings();
+  const theme = useTheme();
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: theme.bg, padding: 16, gap: 16 }}>
@@ -50,6 +51,16 @@ export default function SettingsScreen() {
             <Text style={{ color: lang === l.code ? '#fff' : theme.text }}>
               {l.code === 'auto' ? t('settings_lang_auto') : l.label}
             </Text>
+          </Pressable>
+        ))}
+      </View>
+
+      <Text style={{ fontWeight: '600', color: theme.text }}>{t('settings_theme')}</Text>
+      <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+        {(['light', 'dark', 'auto'] as const).map((m) => (
+          <Pressable key={m} onPress={() => setTheme(m)}
+            style={{ padding: 10, borderRadius: theme.radius, backgroundColor: themeMode === m ? theme.accent : theme.card }}>
+            <Text style={{ color: themeMode === m ? '#fff' : theme.text }}>{t(`settings_theme_${m}`)}</Text>
           </Pressable>
         ))}
       </View>

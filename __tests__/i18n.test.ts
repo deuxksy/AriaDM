@@ -46,3 +46,15 @@ test('row_error 변수 치환 (ko)', () => {
   setLang('ko');
   expect(t('row_error', { code: '22', msg: 'timeout' })).toBe('오류 22: timeout');
 });
+
+test('테마 라벨 4개 언어', () => {
+  setLang('ko');
+  expect(t('settings_theme')).toBe('테마');
+  expect(t('settings_theme_light')).toBe('라이트');
+  setLang('en');
+  expect(t('settings_theme_dark')).toBe('Dark');
+  setLang('ja');
+  expect(t('settings_theme_auto')).toBe('システムに従う');
+  setLang('zh');
+  expect(t('settings_theme')).toBe('主题');
+});
