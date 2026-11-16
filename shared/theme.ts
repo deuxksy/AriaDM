@@ -23,6 +23,3 @@ export const themes: Record<'light' | 'dark', ThemeTokens> = {
     default: { bg: '#000000', card: '#1C1C1E', accent: '#0A84FF', text: '#FFFFFF', muted: '#8E8E93', radius: 12 },
   }),
 };
-
-// 레거시 — 소비자 useTheme 전환 완료 후 제거 예정
-export const theme: ThemeTokens = themes.light;

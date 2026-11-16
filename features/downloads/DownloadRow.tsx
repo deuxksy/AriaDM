@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import type { DownloadInfo } from '../../core/rpc/types';
 import { downloadName, formatBytes, formatEta, formatSpeed, progressPercent } from '../../shared/format';
 import { t } from '../../shared/i18n';
-import { theme } from '../../shared/theme';
+import { useTheme } from '../../shared/ThemeContext';
 
 export function DownloadRow({
   info,
@@ -14,6 +14,7 @@ export function DownloadRow({
   onPauseResume: (gid: string, paused: boolean) => void;
   onOpen: (gid: string) => void;
 }) {
+  const theme = useTheme();
   const total = Number(info.totalLength);
   const done = Number(info.completedLength);
   const speed = Number(info.downloadSpeed);

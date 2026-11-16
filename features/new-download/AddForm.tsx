@@ -7,9 +7,10 @@ import { Aria2, type AddOptions } from '../../core/rpc/methods';
 import { useConnection } from '../../core/rpc/ConnectionContext';
 import { bytesToBase64 } from '../../shared/base64';
 import { t } from '../../shared/i18n';
-import { theme } from '../../shared/theme';
+import { useTheme } from '../../shared/ThemeContext';
 
 export function AddForm() {
+  const theme = useTheme();
   const { conn, profile } = useConnection();
   const [uri, setUri] = useState('');
   const [dir, setDir] = useState('');

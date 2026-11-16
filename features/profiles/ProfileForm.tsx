@@ -4,11 +4,11 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { diagnose } from './diagnose';
 import { useProfiles, type Profile } from './store';
 import { t } from '../../shared/i18n';
-import { theme } from '../../shared/theme';
-
-const input = { backgroundColor: theme.card, borderRadius: theme.radius, padding: 14, color: theme.text };
+import { useTheme } from '../../shared/ThemeContext';
 
 export function ProfileForm() {
+  const theme = useTheme();
+  const input = { backgroundColor: theme.card, borderRadius: theme.radius, padding: 14, color: theme.text };
   const { id } = useLocalSearchParams<{ id?: string }>();
   const existing = useProfiles((s) => s.profiles.find((p) => p.id === id));
   const [name, setName] = useState(existing?.name ?? '');

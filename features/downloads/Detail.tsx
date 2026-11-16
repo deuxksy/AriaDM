@@ -5,9 +5,10 @@ import { useConnection } from '../../core/rpc/ConnectionContext';
 import { useControl } from './queries';
 import { downloadName, formatBytes, formatSpeed } from '../../shared/format';
 import { t } from '../../shared/i18n';
-import { theme } from '../../shared/theme';
+import { useTheme } from '../../shared/ThemeContext';
 
 export function Detail({ gid }: { gid: string }) {
+  const theme = useTheme();
   const { conn } = useConnection();
   const control = useControl();
   const { data } = useQuery({
