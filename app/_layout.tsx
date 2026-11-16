@@ -13,17 +13,25 @@ function ThemedStatusBar() {
   return <StatusBar style={theme.mode === 'dark' ? 'light' : 'dark'} />;
 }
 
+// 모달 헤더도 테마 연동 — expo-router NavigationContainer 기본값은 라이트 고정
+function ThemedStack() {
+  const theme = useTheme();
+  return (
+    <Stack screenOptions={{ headerStyle: { backgroundColor: theme.card }, headerTintColor: theme.text }}>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="modal/[gid]" options={{ presentation: 'modal', title: '' }} />
+      <Stack.Screen name="modal/profile" options={{ presentation: 'modal', title: '' }} />
+    </Stack>
+  );
+}
+
 export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <ConnectionProvider>
         <ThemeProvider>
           <ThemedStatusBar />
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal/[gid]" options={{ presentation: 'modal', title: '' }} />
-            <Stack.Screen name="modal/profile" options={{ presentation: 'modal', title: '' }} />
-          </Stack>
+          <ThemedStack />
         </ThemeProvider>
       </ConnectionProvider>
     </QueryClientProvider>

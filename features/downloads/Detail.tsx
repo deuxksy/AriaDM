@@ -53,19 +53,19 @@ export function Detail({ gid }: { gid: string }) {
         {data.status === 'active' || data.status === 'waiting' ? (
           <Pressable onPress={() => act(t('action_pause'), control.pause.mutateAsync)}
             style={{ padding: 12, borderRadius: theme.radius, backgroundColor: theme.accent }}>
-            <Text style={{ color: '#fff' }}>{t('action_pause')}</Text>
+            <Text style={{ color: theme.onAccent }}>{t('action_pause')}</Text>
           </Pressable>
         ) : null}
         {data.status === 'paused' ? (
           <Pressable onPress={() => act(t('action_resume'), control.resume.mutateAsync)}
             style={{ padding: 12, borderRadius: theme.radius, backgroundColor: theme.accent }}>
-            <Text style={{ color: '#fff' }}>{t('action_resume')}</Text>
+            <Text style={{ color: theme.onAccent }}>{t('action_resume')}</Text>
           </Pressable>
         ) : null}
         {data.status === 'active' || data.status === 'waiting' || data.status === 'paused' ? (
           <Pressable onPress={() => act(t('action_remove'), control.remove.mutateAsync)}
             style={{ padding: 12, borderRadius: theme.radius, backgroundColor: '#FF3B30' }}>
-            <Text style={{ color: '#fff' }}>{t('action_remove')}</Text>
+            <Text style={{ color: theme.onAccent }}>{t('action_remove')}</Text>
           </Pressable>
         ) : (
           <Pressable onPress={() => act(t('action_delete_record'), control.deleteRecord.mutateAsync)}

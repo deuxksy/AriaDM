@@ -48,7 +48,7 @@ export default function SettingsScreen() {
         {availableLangs.map((l) => (
           <Pressable key={l.code} onPress={() => setLang(l.code)}
             style={{ padding: 10, borderRadius: theme.radius, backgroundColor: lang === l.code ? theme.accent : theme.card }}>
-            <Text style={{ color: lang === l.code ? '#fff' : theme.text }}>
+            <Text style={{ color: lang === l.code ? theme.onAccent : theme.text }}>
               {l.code === 'auto' ? t('settings_lang_auto') : l.label}
             </Text>
           </Pressable>
@@ -60,7 +60,7 @@ export default function SettingsScreen() {
         {(['light', 'dark', 'auto'] as const).map((m) => (
           <Pressable key={m} onPress={() => setTheme(m)}
             style={{ padding: 10, borderRadius: theme.radius, backgroundColor: themeMode === m ? theme.accent : theme.card }}>
-            <Text style={{ color: themeMode === m ? '#fff' : theme.text }}>{t(`settings_theme_${m}`)}</Text>
+            <Text style={{ color: themeMode === m ? theme.onAccent : theme.text }}>{t(`settings_theme_${m}`)}</Text>
           </Pressable>
         ))}
       </View>

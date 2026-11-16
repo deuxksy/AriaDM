@@ -53,7 +53,7 @@ export function ProfileForm() {
             {(['http', 'https'] as const).map((s) => (
               <Pressable key={s} onPress={() => setScheme(s)}
                 style={{ padding: 10, borderRadius: theme.radius, backgroundColor: scheme === s ? theme.accent : theme.card }}>
-                <Text style={{ color: scheme === s ? '#fff' : theme.text }}>{s}</Text>
+                <Text style={{ color: scheme === s ? theme.onAccent : theme.text }}>{s}</Text>
               </Pressable>
             ))}
           </View>
@@ -71,7 +71,7 @@ export function ProfileForm() {
       </Pressable>
       <Pressable onPress={save} disabled={!host.trim() || !name.trim()}
         style={{ padding: 16, alignItems: 'center', borderRadius: theme.radius, backgroundColor: theme.accent, opacity: !host.trim() || !name.trim() ? 0.5 : 1 }}>
-        <Text style={{ color: '#fff', fontWeight: '600' }}>{t('profile_save')}</Text>
+        <Text style={{ color: theme.onAccent, fontWeight: '600' }}>{t('profile_save')}</Text>
       </Pressable>
     </ScrollView>
   );

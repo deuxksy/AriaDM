@@ -120,7 +120,7 @@ export function AddForm() {
       </View>
       <TouchableOpacity onPress={submitUri} disabled={busy}
         style={{ backgroundColor: theme.accent, borderRadius: theme.radius, padding: 16, alignItems: 'center', opacity: busy ? 0.5 : 1 }}>
-        {busy ? <ActivityIndicator color="#fff" /> : <Text style={{ color: '#fff', fontWeight: '600' }}>{t('add_submit')}</Text>}
+        {busy ? <ActivityIndicator color={theme.onAccent} /> : <Text style={{ color: theme.onAccent, fontWeight: '600' }}>{t('add_submit')}</Text>}
       </TouchableOpacity>
       <TouchableOpacity onPress={pickTorrent} disabled={busy}
         style={{ borderRadius: theme.radius, padding: 16, alignItems: 'center', borderWidth: 1, borderColor: theme.accent }}>

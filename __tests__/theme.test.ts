@@ -19,7 +19,7 @@ describe('resolveTheme', () => {
   });
 });
 
-const TOKENS: (keyof ThemeTokens)[] = ['bg', 'card', 'accent', 'text', 'muted', 'radius'];
+const TOKENS: (keyof ThemeTokens)[] = ['bg', 'card', 'accent', 'text', 'muted', 'radius', 'onAccent'];
 
 describe('themes 토큰', () => {
   test.each(TOKENS)('light.%s 존재', (k) => {
