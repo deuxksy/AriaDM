@@ -1,5 +1,22 @@
 import { themes, type ThemeTokens } from '../shared/theme';
-import { resolveTheme } from '../shared/ThemeContext';
+import { resolveTheme, toNavTheme } from '../shared/ThemeContext';
+
+describe('toNavTheme — react-navigation 테마 매핑', () => {
+  test('dark 팔레트 → 다크 네비 테마', () => {
+    const nav = toNavTheme(themes.dark, 'dark');
+    expect(nav.dark).toBe(true);
+    expect(nav.colors.background).toBe(themes.dark.bg);
+    expect(nav.colors.card).toBe(themes.dark.card);
+    expect(nav.colors.primary).toBe(themes.dark.accent);
+    expect(nav.colors.text).toBe(themes.dark.text);
+  });
+  test('light 팔레트 → 라이트 네비 테마', () => {
+    const nav = toNavTheme(themes.light, 'light');
+    expect(nav.dark).toBe(false);
+    expect(nav.colors.background).toBe(themes.light.bg);
+    expect(nav.colors.text).toBe(themes.light.text);
+  });
+});
 
 describe('resolveTheme', () => {
   test('auto는 시스템 따름', () => {
