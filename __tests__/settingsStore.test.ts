@@ -1,14 +1,3 @@
-jest.mock('react-native-mmkv', () => {
-  const store = new Map<string, string>();
-  return {
-    createMMKV: () => ({
-      getString: (k: string) => store.get(k) ?? null,
-      set: (k: string, v: string) => { store.set(k, v); },
-      remove: (k: string) => { store.delete(k); },
-    }),
-  };
-});
-
 import { createMMKV } from 'react-native-mmkv';
 import { useSettings } from '../features/settings/store';
 

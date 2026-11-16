@@ -1,4 +1,23 @@
 import { themes, type ThemeTokens } from '../shared/theme';
+import { resolveTheme } from '../shared/ThemeContext';
+
+describe('resolveTheme', () => {
+  test('auto는 시스템 따름', () => {
+    expect(resolveTheme('auto', 'dark')).toBe('dark');
+    expect(resolveTheme('auto', 'light')).toBe('light');
+  });
+  test('auto + 시스템 undefined는 light 폴백', () => {
+    expect(resolveTheme('auto', undefined)).toBe('light');
+    expect(resolveTheme('auto', null)).toBe('light');
+  });
+  test('고정 모드는 시스템 무시', () => {
+    expect(resolveTheme('light', 'dark')).toBe('light');
+    expect(resolveTheme('dark', 'light')).toBe('dark');
+  });
+  test('무효 모드는 auto 취급', () => {
+    expect(resolveTheme('blue', 'dark')).toBe('dark');
+  });
+});
 
 const TOKENS: (keyof ThemeTokens)[] = ['bg', 'card', 'accent', 'text', 'muted', 'radius'];
 
