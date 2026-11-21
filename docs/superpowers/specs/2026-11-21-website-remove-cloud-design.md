@@ -12,7 +12,7 @@
 2. `website/index.html` — Pro 카드 목록에 클라우드 자동 업로드 추가 (ko/en)
 3. `website/style.css` — `.cards` grid `repeat(3, 1fr)` → `repeat(2, 1fr)`
 4. `website/index.html` — 다운로드 CTA v0.1.0 → v0.2.0 (링크·버튼 문구)
-5. 기본 언어 영어 전환 — base 텍스트 en + `data-ko` 속성 구조로 플립, `main.js` 스왑 로직 반전·기본값 `'en'`, `<html lang="en">`·title·meta description 영문화
+5. 기본 언어 영어 전환 — base 텍스트 en + `data-ko` 속성 구조로 플립, `main.js` 스왑 로직 반전·기본값 navigator.language 한국어 감지(`ko`) / 그 외 `'en'`, `<html lang="en">`·title·meta description 영문화. 한국어 브라우저 첫 방문은 한국어 자동 표시 (2026-11-22 사용자 요청 반영)
 
 **Why (기본 언어 영어)**: aria2 사용자는 글로벌 타깃 — 랜딩 기본은 영어, 한국어는 토글로 제공.
 

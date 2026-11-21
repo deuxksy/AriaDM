@@ -1,4 +1,4 @@
-// AriaDM 랜딩 언어 토글 — 우선순위: ?lang= > localStorage > 기본 영어
+// AriaDM 랜딩 언어 토글 — 우선순위: ?lang= > localStorage > navigator.language > 기본 영어
 (function () {
   var KEY = 'ariadm-lang';
 
@@ -16,7 +16,7 @@
   var param = new URLSearchParams(location.search).get('lang');
   var initial = param === 'en' || param === 'ko'
     ? param
-    : localStorage.getItem(KEY) || 'en';
+    : localStorage.getItem(KEY) || (navigator.language.indexOf('ko') === 0 ? 'ko' : 'en');
 
   apply(initial);
 
