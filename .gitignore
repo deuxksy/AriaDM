@@ -54,6 +54,7 @@ local.properties
 # --- OMC operational artifacts ---
 .omc/
 .claude/
+.serena/
 
 # --- Environment ---
 .env
