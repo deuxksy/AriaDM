@@ -3,6 +3,7 @@
 ## 스택
 
 - Expo SDK 57 (expo ~57.0.15), React Native New Architecture, TypeScript strict
+- SDK 버전은 `mise.toml` 고정 (node 24·pnpm 12·java 21) — enter hook이 `git pull --ff-only` 자동 실행
 - Expo는 버전 간 변경이 크다 — 코드 작성 전 https://docs.expo.dev/versions/v57.0.0/ 버전별 문서를 확인한다
 
 ## 명령어 (pnpm만 사용 — npm/yarn 금지)
@@ -39,6 +40,7 @@
 ## 컨벤션
 
 - 주석·커밋 메시지 한국어, Conventional Commits (type은 영어, 설명은 한국어)
+- `.git/index.lock` stale lock은 검증·보고 없이 즉시 제거 — 이 repo에서 반복 발생 (mise enter hook의 git pull과 경합 추정)
 - secret은 repo에 절대 커밋 금지 — `.env`(gitignore)만 사용, 키 목록은 `.env.example`
 - 통합 테스트 secret(`it-secret`)은 docker-compose 고정 테스트 값으로 유일한 예외
 - Jest에서 react-native-mmkv(Nitro) 네이티브 부재 — `jest.setup.js`가 전역 인메모리 mock 제공(삭제 API는 v4 기준 `remove`, `delete` 아님). store를 import하는 테스트는 이 mock 위에서 동작
