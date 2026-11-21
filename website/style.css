@@ -87,7 +87,7 @@ section { max-width: 1080px; margin: 0 auto; padding: 72px 20px; }
 section h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 800; letter-spacing: -0.01em; margin-bottom: 32px; }
 
 /* ---- Features 카드 ---- */
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .card {
   background: var(--card); border: 1px solid var(--line);
   border-radius: 16px; padding: 28px;
