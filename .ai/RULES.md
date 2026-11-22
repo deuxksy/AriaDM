@@ -33,8 +33,9 @@
 
 ## Android 빌드 (로컬)
 
-- release: `JAVA_HOME=$(/usr/libexec/java_home -v 21) android/gradlew -p android assembleRelease` — 산출물 `android/app/build/outputs/apk/release/app-release.apk`
-- `expo prebuild`가 `android/local.properties`를 지울 수 있음 — "SDK location not found" 실패 시 `sdk.dir`(SDK 실제 경로) 재작성 필요
+- release: `JAVA_HOME=$(mise where java) android/gradlew -p android assembleRelease` — 산출물 `android/app/build/outputs/apk/release/app-release.apk` (macOS `java_home`은 mise JDK 미인식 — temurin-17로 폴백해 빌드 정체)
+- `expo prebuild`는 --clean 무관하게 `android/`를 클리어할 수 있음 — 이후 빌드 전 `android/local.properties`의 `sdk.dir=/opt/homebrew/share/android-commandlinetools`(brew) 재확인
+- NDK 빌드 실패 `CXX1101) NDK ... did not have a source.properties file` — ndk 디렉토리가 비어 있는 것. `sdkmanager --install "ndk;27.1.12297006"`로 재설치
 - Expo 57은 app.json `usesCleartextTraffic` 키 미지원(조용히 무시) — http RPC 허용은 `plugins/withCleartextHttp.js`가 manifest에 주입
 
 ## 컨벤션
