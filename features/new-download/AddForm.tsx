@@ -6,11 +6,12 @@ import { useRouter } from 'expo-router';
 import { Aria2, type AddOptions } from '../../core/rpc/methods';
 import { useConnection } from '../../core/rpc/ConnectionContext';
 import { bytesToBase64 } from '../../shared/base64';
-import { t } from '../../shared/i18n';
+import { useTranslation } from '../../shared/i18n';
 import { useTheme } from '../../shared/ThemeContext';
 
 export function AddForm() {
   const theme = useTheme();
+  const t = useTranslation();
   const { conn, profile } = useConnection();
   const [uri, setUri] = useState('');
   const [dir, setDir] = useState('');

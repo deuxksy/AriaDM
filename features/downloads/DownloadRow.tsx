@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { DownloadInfo } from '../../core/rpc/types';
 import { downloadName, formatBytes, formatEta, formatSpeed, progressPercent } from '../../shared/format';
-import { t } from '../../shared/i18n';
+import { useTranslation } from '../../shared/i18n';
 import { useTheme } from '../../shared/ThemeContext';
 
 export function DownloadRow({
@@ -15,6 +15,7 @@ export function DownloadRow({
   onOpen: (gid: string) => void;
 }) {
   const theme = useTheme();
+  const t = useTranslation();
   const total = Number(info.totalLength);
   const done = Number(info.completedLength);
   const speed = Number(info.downloadSpeed);

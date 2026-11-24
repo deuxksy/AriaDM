@@ -18,8 +18,8 @@
 ## 초기 설정
 
 ```bash
-git clone <repo>
-cd AriaDownloaderMananger
+git clone https://github.com/deuxksy/AriaDM.git
+cd AriaDM
 pnpm install
 ```
 
@@ -90,7 +90,7 @@ maestro test .maestro/pause-resume.yaml   # 상세 모달 일시정지/재개
 ```
 app/        — expo-router 라우팅 (tabs: 목록·추가·설정 / modal: 상세·프로필)
 core/       — rpc(aria2 JSON-RPC, WS+HTTP fallback)·notifications·iap
-features/   — 기능별 로직 (profiles, downloads, new-download, stats, settings)
+features/   — 기능별 로직 (profiles, downloads, new-download, settings)
 shared/     — format·base64·i18n(ko/en/zh/ja)·theme
 ```
 

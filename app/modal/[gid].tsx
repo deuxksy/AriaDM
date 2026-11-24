@@ -1,8 +1,9 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { Detail } from '../../features/downloads/Detail';
-import { t } from '../../shared/i18n';
+import { useTranslation } from '../../shared/i18n';
 
 export default function DetailModal() {
+  const t = useTranslation();
   const { gid } = useLocalSearchParams<{ gid: string }>();
   return (
     <>

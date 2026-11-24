@@ -1,4 +1,6 @@
 import * as Localization from 'expo-localization';
+import { useCallback } from 'react';
+import { create } from 'zustand';
 import { en, type DictKey } from './en';
 import { ko } from './ko';
 import { zh } from './zh';
@@ -15,7 +17,8 @@ export const availableLangs = [
   { code: 'ja', label: '日本語' },
 ];
 
-let effective = 'en';
+const useEffectiveLang = create(() => 'en');
+type Vars = Record<string, string | number>;
 
 function resolve(code: string): string {
   return code in DICTS ? code : 'en';
@@ -23,17 +26,25 @@ function resolve(code: string): string {
 
 // pref 'auto'면 기기 언어 따름 — 앱 시작 시 settings store가 호출
 export function initLang(pref: string): void {
-  effective = pref === 'auto'
-    ? resolve(Localization.getLocales()[0]?.languageCode ?? 'en')
-    : resolve(pref);
+  setLang(pref === 'auto' ? Localization.getLocales()[0]?.languageCode ?? 'en' : pref);
 }
 
-export function setLang(code: string): void { effective = resolve(code); }
-export function getLang(): string { return effective; }
+export function setLang(code: string): void { useEffectiveLang.setState(resolve(code), true); }
+export function getLang(): string { return useEffectiveLang.getState(); }
 
-export function t(key: string, vars?: Record<string, string | number>): string {
-  const s = DICTS[effective]?.[key as DictKey] ?? en[key as DictKey] ?? key;
+function translate(lang: string, key: string, vars?: Vars): string {
+  const s = DICTS[lang]?.[key as DictKey] ?? en[key as DictKey] ?? key;
   let out = s;
   if (vars) for (const [k, v] of Object.entries(vars)) out = out.replaceAll(`{${k}}`, String(v));
   return out;
+}
+
+export function useTranslation() {
+  const lang = useEffectiveLang();
+  return useCallback((key: string, vars?: Vars) => translate(lang, key, vars), [lang]);
+}
+
+// 백그라운드 알림은 React 밖에서 현재 언어를 조회한다.
+export function t(key: string, vars?: Vars): string {
+  return translate(getLang(), key, vars);
 }

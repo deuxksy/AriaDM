@@ -5,7 +5,7 @@ aria2 원격 제어 모바일 앱 (Android/iOS). React Native + Expo 단일 코�
 ## 문서
 
 - [문서 허브](docs/README.md) — 전체 문서 구조(OKF/archive/superpowers) 안내
-- [OKF 문서](docs/okf/README.md) — Diátaxis 기반 안내 문서
+- [목적별 문서 찾기](./docs/okf/README.md) — 개발 환경 구성, 테스트, 스토어 등록 준비
 
 ## 프로젝트 정보
 
@@ -16,7 +16,7 @@ aria2 원격 제어 모바일 앱 (Android/iOS). React Native + Expo 단일 코�
 
 ## 개발
 
-- 게이트: `pnpm typecheck && pnpm test`
+- 저장소 루트에서 `pnpm install`로 의존성을 설치한 뒤 `pnpm typecheck && pnpm test`로 타입과 단위 테스트를 확인합니다.
 - `pnpm it:docker` — docker aria2 통합 테스트 (자동 기동/정리)
 - `pnpm it:heritage` — heritage 운영 인스턴스 통합 테스트 (실데이터)
 - `pnpm start` — Metro 실행

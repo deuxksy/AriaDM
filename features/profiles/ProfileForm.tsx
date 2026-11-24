@@ -3,11 +3,12 @@ import { ActivityIndicator, Alert, Pressable, ScrollView, Text, TextInput, View 
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { diagnose } from './diagnose';
 import { useProfiles, type Profile } from './store';
-import { t } from '../../shared/i18n';
+import { useTranslation } from '../../shared/i18n';
 import { useTheme } from '../../shared/ThemeContext';
 
 export function ProfileForm() {
   const theme = useTheme();
+  const t = useTranslation();
   const input = { backgroundColor: theme.card, borderRadius: theme.radius, padding: 14, color: theme.text };
   const { id } = useLocalSearchParams<{ id?: string }>();
   const existing = useProfiles((s) => s.profiles.find((p) => p.id === id));
@@ -48,7 +49,7 @@ export function ProfileForm() {
           <TextInput value={port} onChangeText={setPort} keyboardType="number-pad" style={input} />
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={{ color: theme.muted }}>Scheme</Text>
+          <Text style={{ color: theme.muted }}>{t('profile_scheme')}</Text>
           <View style={{ flexDirection: 'row', gap: 8, marginTop: 8 }}>
             {(['http', 'https'] as const).map((s) => (
               <Pressable key={s} onPress={() => setScheme(s)}

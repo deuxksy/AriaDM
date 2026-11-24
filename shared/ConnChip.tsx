@@ -1,8 +1,9 @@
 import { Text, View } from 'react-native';
 import { useConnection } from '../core/rpc/ConnectionContext';
-import { t } from './i18n';
+import { useTranslation } from './i18n';
 
 export function ConnChip() {
+  const t = useTranslation();
   const { state } = useConnection();
   const color = state === 'connected' ? '#34C759' : state === 'degraded' ? '#FF9500' : '#FF3B30';
   const label = t(`state_${state}` as never);

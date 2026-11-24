@@ -12,7 +12,7 @@
 - `pnpm typecheck` — tsc --noEmit
 - `pnpm test` — 단위 테스트 (jest-expo, jest 29 고정 — jest-expo 57 호환)
 - `pnpm it:docker` — docker aria2 통합 테스트 (자동 기동/정리)
-- `pnpm it:heritage` — heritage 운영 인스턴스 통합 테스트 (실데이터, secret은 ssh 런타임 조회)
+- `pnpm it:heritage` — 운영 서버에서 다운로드를 추가·제어하고 패턴으로 파일·대기열 항목을 정리한다. 운영 테스트를 요청받은 경우 실행한다. secret은 SSH로 런타임 조회한다.
 
 ## 구조
 
@@ -41,8 +41,8 @@
 ## 컨벤션
 
 - 주석·커밋 메시지 한국어, Conventional Commits (type은 영어, 설명은 한국어)
-- `.git/index.lock` stale lock은 검증·보고 없이 즉시 제거 — 이 repo에서 반복 발생 (mise enter hook의 git pull과 경합 추정)
-- secret은 repo에 절대 커밋 금지 — `.env`(gitignore)만 사용, 키 목록은 `.env.example`
+- Git 인덱스 잠금 오류가 나면 `git rev-parse --git-path index.lock`으로 경로를 확인한다. Git 작업이 끝났고 잠금 파일만 남아 있을 때 제거한다.
+- secret은 repo에 커밋 금지. `.env.example`은 로컬 통합 테스트 변수 예시다. 앱의 RPC secret은 SecureStore에 저장한다.
 - 통합 테스트 secret(`it-secret`)은 docker-compose 고정 테스트 값으로 유일한 예외
 - Jest에서 react-native-mmkv(Nitro) 네이티브 부재 — `jest.setup.js`가 전역 인메모리 mock 제공(삭제 API는 v4 기준 `remove`, `delete` 아님). store를 import하는 테스트는 이 mock 위에서 동작
 

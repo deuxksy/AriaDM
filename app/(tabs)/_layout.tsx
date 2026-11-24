@@ -1,10 +1,11 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../shared/ThemeContext';
-import { t } from '../../shared/i18n';
+import { useTranslation } from '../../shared/i18n';
 
 export default function TabsLayout() {
   const theme = useTheme();
+  const t = useTranslation();
   return (
     <Tabs screenOptions={({ route }) => ({
       tabBarInactiveTintColor: theme.muted,

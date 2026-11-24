@@ -4,11 +4,12 @@ import { Aria2 } from '../../core/rpc/methods';
 import { useConnection } from '../../core/rpc/ConnectionContext';
 import { useControl } from './queries';
 import { downloadName, formatBytes, formatSpeed } from '../../shared/format';
-import { t } from '../../shared/i18n';
+import { useTranslation } from '../../shared/i18n';
 import { useTheme } from '../../shared/ThemeContext';
 
 export function Detail({ gid }: { gid: string }) {
   const theme = useTheme();
+  const t = useTranslation();
   const { conn } = useConnection();
   const control = useControl();
   const { data } = useQuery({
@@ -23,18 +24,18 @@ export function Detail({ gid }: { gid: string }) {
   const act = (label: string, fn: (g: string) => Promise<unknown>) => {
     Alert.alert(label, '', [
       { text: label, onPress: () => fn(gid).catch((e: Error) => Alert.alert('AriaDM', `${t('control_failed')}: ${e.message}`)) },
-      { text: 'Cancel', style: 'cancel' },
+      { text: t('action_cancel'), style: 'cancel' },
     ]);
   };
 
   const rows: [string, string][] = [
-    ['GID', data.gid],
-    ['Status', data.status],
-    ['Path', data.dir],
-    ['Size', `${formatBytes(Number(data.completedLength))} / ${formatBytes(Number(data.totalLength))}`],
-    ['Speed', formatSpeed(Number(data.downloadSpeed))],
-    ['Connections', data.connections],
-    ...(data.errorCode !== '0' && data.errorCode ? ([['Error', `${data.errorCode}: ${data.errorMessage}`]] as [string, string][]) : []),
+    ['detail_gid', data.gid],
+    ['detail_status', t(`status_${data.status}`)],
+    ['detail_path', data.dir],
+    ['detail_size', `${formatBytes(Number(data.completedLength))} / ${formatBytes(Number(data.totalLength))}`],
+    ['detail_speed', formatSpeed(Number(data.downloadSpeed))],
+    ['detail_connections', data.connections],
+    ...(data.errorCode !== '0' && data.errorCode ? ([['detail_error', `${data.errorCode}: ${data.errorMessage}`]] as [string, string][]) : []),
   ];
 
   return (
@@ -42,7 +43,7 @@ export function Detail({ gid }: { gid: string }) {
       <Text style={{ fontSize: 17, fontWeight: '600', color: theme.text }}>{downloadName(data)}</Text>
       {rows.map(([k, v]) => (
         <View key={k} style={{ flexDirection: 'row', gap: 8 }}>
-          <Text style={{ color: theme.muted, width: 100 }}>{k}</Text>
+          <Text style={{ color: theme.muted, width: 100 }}>{t(k)}</Text>
           <Text style={{ color: theme.text, flex: 1 }}>{v}</Text>
         </View>
       ))}

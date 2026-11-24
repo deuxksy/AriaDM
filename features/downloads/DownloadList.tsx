@@ -6,12 +6,13 @@ import { SEGMENTS, SEG_TO_KIND, filterBySegment, type SegmentKey } from './segme
 import { CONN_STATE_META } from './connState';
 import { DownloadRow } from './DownloadRow';
 import { useConnection } from '../../core/rpc/ConnectionContext';
-import { t } from '../../shared/i18n';
+import { useTranslation } from '../../shared/i18n';
 import { useTheme } from '../../shared/ThemeContext';
 import { formatSpeed } from '../../shared/format';
 
 export function DownloadList() {
   const theme = useTheme();
+  const t = useTranslation();
   const [seg, setSeg] = useState<SegmentKey>('active');
   const [limit, setLimit] = useState(100); // 스크롤 확장 — heritage waiting 500+ 대응
   const active = useDownloads('active');

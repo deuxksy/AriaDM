@@ -4,7 +4,7 @@ import { useProfiles } from '../../features/profiles/store';
 import { useSettings } from '../../features/settings/store';
 import { ensurePermission } from '../../core/notifications/notifications';
 import { isPro } from '../../core/iap/entitlement';
-import { availableLangs, t } from '../../shared/i18n';
+import { availableLangs, useTranslation } from '../../shared/i18n';
 import { useTheme } from '../../shared/ThemeContext';
 
 export default function SettingsScreen() {
@@ -12,6 +12,7 @@ export default function SettingsScreen() {
   const { profiles, activeId, setActive } = useProfiles();
   const { notifyOnComplete, setNotify, lang, setLang, themeMode, setTheme } = useSettings();
   const theme = useTheme();
+  const t = useTranslation();
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: theme.bg, padding: 16, gap: 16 }}>
@@ -22,7 +23,7 @@ export default function SettingsScreen() {
             { text: t('profile_edit'), onPress: () => router.push(`/modal/profile?id=${p.id}`) },
             { text: t('profile_delete'), style: 'destructive' as const,
               onPress: () => useProfiles.getState().removeProfile(p.id) },
-            { text: 'Cancel', style: 'cancel' as const },
+            { text: t('action_cancel'), style: 'cancel' as const },
           ])}
           style={{ backgroundColor: theme.card, borderRadius: theme.radius, padding: 14 }}>
           <Text style={{ color: p.id === activeId ? theme.accent : theme.text, fontWeight: p.id === activeId ? '700' : '400' }}>{p.name}</Text>
@@ -65,7 +66,7 @@ export default function SettingsScreen() {
         ))}
       </View>
 
-      <Text style={{ color: theme.muted, fontSize: 12 }}>v1 — Free (Pro: {String(isPro())})</Text>
+      <Text style={{ color: theme.muted, fontSize: 12 }}>v1 — {isPro() ? 'Pro' : t('plan_free')}</Text>
     </ScrollView>
   );
 }
